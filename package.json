@@ -1,0 +1,22 @@
+{
+  "name": "beerbros",
+  "version": "1.0.0",
+  "description": "Website for logging beers",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoelBalmer/BeerBros.git"
+  },
+  "author": "Joel Balmer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoelBalmer/BeerBros/issues"
+  },
+  "homepage": "https://github.com/JoelBalmer/BeerBros#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
