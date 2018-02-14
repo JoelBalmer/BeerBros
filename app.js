@@ -4,4 +4,13 @@ var express = require('express');
 var app = express();
 var server = app.listen(3000);
 
-app.use(express.static('public'));
+app.use(express.static("public"));
+
+var myArray = ["Something"];
+
+app.get("/hello/", function(req, res, next){
+	res.send(myArray);
+	myArray.push("Something else");
+
+	next();
+});

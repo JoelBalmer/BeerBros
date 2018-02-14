@@ -1,8 +1,8 @@
 function getFunction() {
   console.log("Making get request");
 
-  $.ajax("/hello/", function(response){
-    console.log("Here's the response");
+  $.get("/hello/", function(response){
+    console.log("Receiving the response");
     console.log(response);
   });
 }
