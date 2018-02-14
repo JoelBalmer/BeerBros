@@ -4,5 +4,7 @@ function getFunction() {
   $.get("/hello/", function(response){
     console.log("Receiving the response");
     console.log(response);
+
+    document.getElementById("button").innerHTML = response;
   });
 }

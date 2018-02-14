@@ -8,7 +8,7 @@ app.use(express.static("public"));
 
 var myArray = ["Something"];
 
-app.get("/hello/", function(req, res, next){
+app.get("/hello/", (req, res, next) => {
 	res.send(myArray);
 	myArray.push("Something else");
 
