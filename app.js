@@ -1,16 +1,10 @@
-console.log('My socket server is running...');
-var express = require('express');
+console.log('My server is running...');
 
-var app = express();
-var server = app.listen(3000);
+let express = require('express');
+let app = express();
+let server = app.listen(3000);
 
 app.use(express.static("public"));
 
-var myArray = ["Something"];
-
-app.get("/hello/", (req, res, next) => {
-	res.send(myArray);
-	myArray.push("Something else");
-
-	next();
-});
+const beersRouter = require('./beers-router.js');
+app.use('/beers/', beersRouter);

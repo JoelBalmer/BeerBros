@@ -1,3 +1,13 @@
 #root {
-  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	margin: 20px;
+}
+
+h1 {
+	margin-bottom: 20px;
+}
+
+button {
+	display: block;
+	margin-bottom: 10px;
 }

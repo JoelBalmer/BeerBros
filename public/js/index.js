@@ -1,10 +1,53 @@
-function getFunction() {
+function getBeers() {
   console.log("Making get request");
 
-  $.get("/hello/", function(response){
+  $.get("/beers/", function(response){
     console.log("Receiving the response");
     console.log(response);
 
-    document.getElementById("button").innerHTML = response;
+    document.getElementById("get-beers").innerHTML = response;
+  });
+}
+
+function getBeer() {
+  console.log("Making get request");
+
+  $.get("/beers/", function(response){
+    console.log("Receiving the response");
+    console.log(response);
+
+    document.getElementById("get-beers").innerHTML = response;
+  });
+}
+
+function createBeer() {
+  console.log("Making get request");
+
+  $.get("/beers/", function(response){
+    console.log("Receiving the response");
+    console.log(response);
+
+    document.getElementById("get-beers").innerHTML = response;
+  });
+}
+
+function updateBeer() {
+  console.log("Making get request");
+
+  $.get("/beers/", function(response){
+    console.log("Receiving the response");
+    console.log(response);
+
+    document.getElementById("get-beers").innerHTML = response;
+  });
+}
+function deleteBeer() {
+  console.log("Making get request");
+
+  $.get("/beers/", function(response){
+    console.log("Receiving the response");
+    console.log(response);
+
+    document.getElementById("get-beers").innerHTML = response;
   });
 }
