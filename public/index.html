@@ -21,13 +21,23 @@
     </noscript>
     
     <div id="root">
-    	<h1>Hello, express!</h1>
+    	<h1>Hello, beer collector!</h1>
+      &nbsp;
+      &nbsp;
       <button id="get-beers" onclick="getBeers()">Get beers</button>
       <button id="get-beer" onclick="getBeer()">Get a beer</button>
       <button id="create-beer" onclick="createBeer()">Create a beer</button>
       <button id="update-beer" onclick="updateBeer()">Update a beer</button>
       <button id="delete-beer" onclick="deleteBeer()">Delete a beer</button>
-      <p id="feedback"></p>
+      &nbsp;
+      <p id="feedback">Perform an action</p>
+      &nbsp;
+      <div id="input-area" class="input-hide">
+        <input id="input-name" type="text" placeholder="Name"/>
+        <input id="input-taste" type="text" placeholder="Taste"/>
+        <input id="input-look" type="text" placeholder="Look"/>
+        <button id="input-send" onclick="inputSend()">Send</button>
+      </div>
     </div>
   </body>
 </html>

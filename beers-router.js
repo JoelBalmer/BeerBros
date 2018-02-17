@@ -1,6 +1,17 @@
 const express = require('express');
 
-let beers = ['Budvar'];
+let beers = [
+  {
+    name: 'budvar',
+    taste: 'ok',
+    look: 'normal'
+  },
+  {
+    name: 'doubloon',
+    taste: 'great',
+    look: 'nice'
+  }
+];
 
 let beersRouter = express.Router();
 
@@ -19,6 +30,24 @@ beersRouter.get('/:id', (req, res, next) => {
   }
 });
 
+// Create an expression
+beersRouter.post('/', (req, res, next) => {
+  console.log('hello');
+  console.log(req.query);
+  
+  beers.push(req.query);
+  res.send(req.query);
+
+  /*
+  if (receivedExpression) {
+    expressions.push(receivedExpression);
+    res.status(201).send(receivedExpression);
+  } else {
+    res.status(400).send();
+  }
+  */
+});
+
 // Update an expression
 beersRouter.put('/:id', (req, res, next) => {
   const expressionIndex = getIndexById(req.params.id, expressions);
@@ -27,17 +56,6 @@ beersRouter.put('/:id', (req, res, next) => {
     res.send(expressions[expressionIndex]);
   } else {
     res.status(404).send();
-  }
-});
-
-// Create an expression
-beersRouter.post('/', (req, res, next) => {
-  const receivedExpression = createElement('expressions', req.query);
-  if (receivedExpression) {
-    expressions.push(receivedExpression);
-    res.status(201).send(receivedExpression);
-  } else {
-    res.status(400).send();
   }
 });
 
