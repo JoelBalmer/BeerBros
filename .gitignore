@@ -1,3 +1,6 @@
+# My own stuff
+resources/
+
 # Logs
 logs
 *.log
@@ -56,4 +59,3 @@ typings/
 
 # dotenv environment variables file
 .env
-

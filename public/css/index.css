@@ -11,7 +11,7 @@
   display: block;
 }
 
-button, input {
+button, input, img   {
 	display: block;
 	margin-bottom: 10px;
 }
