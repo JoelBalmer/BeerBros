@@ -10,26 +10,7 @@ function getBeers() {
     console.log(response);
 
     //PUT INTO TABLE
-    let table = document.getElementById('beer-table');
-    
-    for (let index in response) {
-      let beer = response[index];
-
-      let nameData = document.createElement('td');
-      let tasteData = document.createElement('td');
-      let lookData = document.createElement('td');
-
-      nameData.innerText = beer.name;
-      tasteData.innerText = beer.taste;
-      lookData.innerText = beer.look;
-
-      let row = document.createElement('tr');
-      row.append(nameData);
-      row.append(tasteData);
-      row.append(lookData);
-
-      table.append(row);
-    }
+    putIntoTable(response);
   });
 }
 
@@ -86,4 +67,28 @@ const inputSend = () => {
 
     document.getElementById("feedback").innerHTML = JSON.stringify(response);
   });
+}
+
+const putIntoTable = (response) => {
+  let table = document.getElementById('beer-table');
+    
+    for (let index in response) {
+      let beer = response[index];
+
+      // Put into row
+      let nameData = document.createElement('td');
+      let tasteData = document.createElement('td');
+      let lookData = document.createElement('td');
+
+      nameData.innerText = beer.name;
+      tasteData.innerText = beer.taste;
+      lookData.innerText = beer.look;
+
+      let row = document.createElement('tr');
+      row.append(nameData);
+      row.append(tasteData);
+      row.append(lookData);
+
+      table.append(row);
+    }
 }
