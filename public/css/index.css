@@ -15,3 +15,16 @@ button, input, img   {
 	display: block;
 	margin-bottom: 10px;
 }
+
+table {
+	border: solid black 1px;
+}
+
+th, td {
+	padding: 5px;
+}
+
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}

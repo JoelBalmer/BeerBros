@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function(event) { 
+  console.log('Doc ready!');
+});
+
 function getBeers() {
   console.log("Making get request");
 
@@ -5,8 +9,27 @@ function getBeers() {
     console.log("Receiving the response");
     console.log(response);
 
-    let string = JSON.stringify(response);
-    document.getElementById("feedback").innerText = string;
+    //PUT INTO TABLE
+    let table = document.getElementById('beer-table');
+    
+    for (let index in response) {
+      let beer = response[index];
+
+      let nameData = document.createElement('td');
+      let tasteData = document.createElement('td');
+      let lookData = document.createElement('td');
+
+      nameData.innerText = beer.name;
+      tasteData.innerText = beer.taste;
+      lookData.innerText = beer.look;
+
+      let row = document.createElement('tr');
+      row.append(nameData);
+      row.append(tasteData);
+      row.append(lookData);
+
+      table.append(row);
+    }
   });
 }
 
