@@ -18,13 +18,22 @@ button, input, img   {
 
 table {
 	border: solid black 1px;
+	counter-reset: rowNumber;
 }
 
 th, td {
 	padding: 5px;
 }
 
-
 tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+table tr:not(:first-child) {
+  counter-increment: rowNumber;
+}
+
+table tr td:first-child::before {
+  content: counter(rowNumber);
+  margin-right: 0.5em;
 }

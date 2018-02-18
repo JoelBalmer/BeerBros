@@ -2,14 +2,14 @@ const express = require('express');
 
 let beers = [
   {
-    name: 'budvar',
-    taste: 'ok',
-    look: 'normal'
+    name: 'Budvar',
+    taste: 'Not bad',
+    look: 'Normal'
   },
   {
-    name: 'doubloon',
-    taste: 'great',
-    look: 'nice'
+    name: 'Doubloon',
+    taste: 'Great',
+    look: 'Nice!'
   }
 ];
 
