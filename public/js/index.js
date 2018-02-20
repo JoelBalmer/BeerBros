@@ -9,8 +9,11 @@ function getBeers() {
     console.log("Receiving the response");
     console.log(response);
 
-    //PUT INTO TABLE
-    putIntoTable(response);
+    response.forEach((beer) => {
+      console.log('heres a beer');
+      console.log(beer);
+      document.getElementById('beer-table-body').append(rowFromBeer(beer));
+    });
   });
 }
 
@@ -65,30 +68,29 @@ const inputSend = () => {
     console.log("Receiving the response");
     console.log(response);
 
-    document.getElementById("feedback").innerHTML = JSON.stringify(response);
+    document.getElementById('beer-table-body').append(rowFromBeer(response));
   });
 }
 
-const putIntoTable = (response) => {
-  let table = document.getElementById('beer-table');
-    
-    for (let index in response) {
-      let beer = response[index];
+const rowFromBeer = (beer) => {    
+  let row = document.createElement('tr');
 
-      // Put into row
-      let nameData = document.createElement('td');
-      let tasteData = document.createElement('td');
-      let lookData = document.createElement('td');
+  console.log(beer);
 
-      nameData.innerText = beer.name;
-      tasteData.innerText = beer.taste;
-      lookData.innerText = beer.look;
+  // create row data
+  let numberData = document.createElement('td');
+  let nameData = document.createElement('td');
+  let tasteData = document.createElement('td');
+  let lookData = document.createElement('td');
 
-      let row = document.createElement('tr');
-      row.append(nameData);
-      row.append(tasteData);
-      row.append(lookData);
+  nameData.innerText = beer.name;
+  tasteData.innerText = beer.taste;
+  lookData.innerText = beer.look;
 
-      table.append(row);
-    }
+  row.append(numberData);
+  row.append(nameData);
+  row.append(tasteData);
+  row.append(lookData);
+
+  return row;
 }

@@ -4,11 +4,11 @@
 }
 
 .input-hide {
-  display: none;
+	display: none;
 }
 
 .input-show {
-  display: block;
+	display: block;
 }
 
 button, input, img   {
@@ -16,24 +16,27 @@ button, input, img   {
 	margin-bottom: 10px;
 }
 
+th, td {
+	padding: 5px;
+}
+
+th {
+	background-color: #ffffff;
+}
+
+tr:nth-child(odd) {
+	background-color: #dddddd;
+}
+
 table {
 	border: solid black 1px;
 	counter-reset: rowNumber;
 }
 
-th, td {
-	padding: 5px;
+table tr > td:first-child {
+	counter-increment: rowNumber;
 }
 
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-
-table tr:not(:first-child) {
-  counter-increment: rowNumber;
-}
-
-table tr td:first-child::before {
-  content: counter(rowNumber);
-  margin-right: 0.5em;
+tbody tr td:first-child::before {
+	content: counter(rowNumber);
 }
