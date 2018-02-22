@@ -16,6 +16,7 @@ function getBeers() {
     });
 
     document.getElementById('beer-table-body').replaceWith(newTableBody);
+    makeCellsClickable();
   });
 }
 
@@ -69,6 +70,7 @@ const inputSend = () => {
     var newTable = createTableBody();
     newTable.append(rowFromBeer(response));
     document.getElementById('beer-table-body').replaceWith(newTable);
+    makeCellsClickable();
   });
 }
 
@@ -101,4 +103,10 @@ const createTableBody = () => {
   let tableBody = document.createElement('tbody');
   tableBody.id = 'beer-table-body';
   return tableBody;
+}
+
+const makeCellsClickable = () => {
+  $('td').click(function() {
+    console.log(this.cellIndex + ', ' + this.parentNode.rowIndex);
+  })
 }

@@ -16,21 +16,25 @@ button, input, img   {
 	margin-bottom: 10px;
 }
 
-th, td {
-	padding: 5px;
-}
-
 th {
 	background-color: #ffffff;
+}
+
+table {
+	border: solid black 1px;
+	counter-reset: rowNumber;
 }
 
 tr:nth-child(odd) {
 	background-color: #dddddd;
 }
 
-table {
-	border: solid black 1px;
-	counter-reset: rowNumber;
+tr:hover {
+	background: lightBlue;
+}
+
+th, td {
+	padding: 5px;
 }
 
 table tr > td:first-child {
