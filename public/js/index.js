@@ -2,18 +2,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
   console.log('Doc ready!');
 });
 
+// button handlers
+
 function getBeers() {
   console.log("Making get request");
 
   $.get("/beers/", function(response){
     console.log("Receiving the response");
-    console.log(response);
+    let newTableBody = createTableBody();
 
     response.forEach((beer) => {
-      console.log('heres a beer');
-      console.log(beer);
-      document.getElementById('beer-table-body').append(rowFromBeer(beer));
+      newTableBody.append(rowFromBeer(beer));
     });
+
+    document.getElementById('beer-table-body').replaceWith(newTableBody);
   });
 }
 
@@ -22,7 +24,6 @@ function getBeer() {
 
   $.get('/beers/', function(response){
     console.log("Receiving the response");
-    console.log(response);
 
     document.getElementById("get-beers").innerHTML = response;
   });
@@ -38,7 +39,6 @@ function updateBeer() {
 
   $.get("/beers/", function(response){
     console.log("Receiving the response");
-    console.log(response);
 
     document.getElementById("get-beers").innerHTML = response;
   });
@@ -49,7 +49,6 @@ function deleteBeer() {
 
   $.get("/beers/", function(response){
     console.log("Receiving the response");
-    console.log(response);
 
     document.getElementById("get-beers").innerHTML = response;
   });
@@ -66,11 +65,14 @@ const inputSend = () => {
 
   $.post(url, function(response){
     console.log("Receiving the response");
-    console.log(response);
 
-    document.getElementById('beer-table-body').append(rowFromBeer(response));
+    var newTable = createTableBody();
+    newTable.append(rowFromBeer(response));
+    document.getElementById('beer-table-body').replaceWith(newTable);
   });
 }
+
+// private methods
 
 const rowFromBeer = (beer) => {    
   let row = document.createElement('tr');
@@ -93,4 +95,10 @@ const rowFromBeer = (beer) => {
   row.append(lookData);
 
   return row;
+}
+
+const createTableBody = () => {
+  let tableBody = document.createElement('tbody');
+  tableBody.id = 'beer-table-body';
+  return tableBody;
 }
