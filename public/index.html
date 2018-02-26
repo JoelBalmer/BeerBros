@@ -24,33 +24,37 @@
     	<h1>Hello, beer collector!</h1>
       &nbsp;
       <img src="./img/Beer_Emoji_small.png"/>
+
       &nbsp;
-      <button id="get-beers" onclick="getBeers()">Get beers</button>
-      <button id="get-beer" onclick="getBeer()">Get a beer</button>
-      <button id="create-beer" onclick="createBeer()">Create a beer</button>
-      <button id="update-beer" onclick="updateBeer()">Update a beer</button>
-      <button id="delete-beer" onclick="deleteBeer()">Delete a beer</button>
-      &nbsp;
-      <p id="feedback">Perform an action</p>
+      <p id="feedback">Here are your beers</p>
       <table id="beer-table">
         <thead>
           <tr>
-          <th>No.</th>
-          <th>Name</th>
-          <th>Taste</th>
-          <th>Look</th>
-        </tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Taste</th>
+            <th>Look</th>
+          </tr>
         </thead>
         <tbody id="beer-table-body">
+          <tr class="new-beer">
+            <td>
+              <button id="input-send" onclick="inputSend(this)">&check;</button>
+            </td>
+            <td>
+              <input id="input-name" type="text" placeholder="Enter name" autofocus="autofocus"/>
+            </td>
+            <td>
+              <input id="input-taste" type="text" placeholder="Enter taste"/>
+            </td>
+            <td>
+              <input id="input-look" type="text" placeholder="Enter look"/>
+            </td>
+          </tr>
         </tbody>
       </table>
       &nbsp;
-      <div id="input-area" class="input-hide">
-        <input id="input-name" type="text" placeholder="Name"/>
-        <input id="input-taste" type="text" placeholder="Taste"/>
-        <input id="input-look" type="text" placeholder="Look"/>
-        <button id="input-send" onclick="inputSend()">Send</button>
-      </div>
+      <button id="create-beer" onclick="createBeer(this)">Add a beer</button>
     </div>
   </body>
 </html>

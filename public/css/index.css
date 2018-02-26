@@ -3,14 +3,6 @@
 	margin: 20px;
 }
 
-.input-hide {
-	display: none;
-}
-
-.input-show {
-	display: block;
-}
-
 button, input, img   {
 	display: block;
 	margin-bottom: 10px;
@@ -43,4 +35,8 @@ table tr > td:first-child {
 
 tbody tr td:first-child::before {
 	content: counter(rowNumber);
+}
+
+.new-beer > td:first-child::before {
+	content: none;
 }

@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
   console.log('Doc ready!');
+  //getBeers();
 });
 
 // button handlers
@@ -30,9 +31,9 @@ function getBeer() {
   });
 }
 
-function createBeer() {
+function createBeer(button) {
   console.log('Opening input area');
-  document.getElementById('input-area').classList = "input-show";
+  button.disabled = true;
 }
 
 function updateBeer() {
@@ -52,7 +53,7 @@ function deleteBeer() {
     console.log("Receiving the response");
 
     document.getElementById("get-beers").innerHTML = response;
-  });
+  }); 
 }
 
 const inputSend = () => {
@@ -70,7 +71,10 @@ const inputSend = () => {
     var newTable = createTableBody();
     newTable.append(rowFromBeer(response));
     document.getElementById('beer-table-body').replaceWith(newTable);
+
     makeCellsClickable();
+
+    document.getElementById('create-beer').disabled = false;
   });
 }
 
