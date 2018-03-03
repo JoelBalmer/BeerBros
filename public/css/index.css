@@ -37,6 +37,6 @@ tbody tr td:first-child::before {
 	content: counter(rowNumber);
 }
 
-.new-beer > td:first-child::before {
+#new-beer > td:first-child::before {
 	content: none;
 }

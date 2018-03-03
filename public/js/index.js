@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
   console.log('Doc ready!');
-  //getBeers();
+  getBeers();
 });
 
 // button handlers
@@ -10,13 +10,19 @@ function getBeers() {
 
   $.get("/beers/", function(response){
     console.log("Receiving the response");
-    let newTableBody = createTableBody();
 
-    response.forEach((beer) => {
-      newTableBody.append(rowFromBeer(beer));
+    response.forEach((beer, index) => {
+      /*
+      var currentRow = document.getElementById('beer-table').rows[2];
+      var newRow = rowFromBeer(beer);
+      if (!currentRow && currentRow.childNodes[1].innerText != newRow.childNodes[1].innerText) {
+        
+      }
+      */
+
+      document.getElementById('beer-table-body').append(rowFromBeer(beer));
     });
 
-    document.getElementById('beer-table-body').replaceWith(newTableBody);
     makeCellsClickable();
   });
 }
@@ -33,6 +39,8 @@ function getBeer() {
 
 function createBeer(button) {
   console.log('Opening input area');
+
+  document.getElementById('new-beer').hidden = false;
   button.disabled = true;
 }
 
@@ -68,13 +76,16 @@ const inputSend = () => {
   $.post(url, function(response){
     console.log("Receiving the response");
 
-    var newTable = createTableBody();
-    newTable.append(rowFromBeer(response));
-    document.getElementById('beer-table-body').replaceWith(newTable);
+    //var newTable = createTableBody();
+    //newTable.append(rowFromBeer(response));
+    //document.getElementById('beer-table-body').append(rowFromBeer(response));
+
+    getBeers();
 
     makeCellsClickable();
 
     document.getElementById('create-beer').disabled = false;
+    document.getElementById('new-beer').hidden = true;
   });
 }
 

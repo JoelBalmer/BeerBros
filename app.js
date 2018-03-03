@@ -7,5 +7,5 @@ let server = app.listen(3000);
 app.use(express.static("public"));
 
 // handle the CRUD for beers
-const beersRouter = require('./beers-router.js');
+const beersRouter = require('./routers/beers-router.js');
 app.use('/beers/', beersRouter);
