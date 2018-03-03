@@ -5,7 +5,6 @@
 
 button, input, img   {
 	display: block;
-	margin-bottom: 10px;
 }
 
 th {
@@ -26,7 +25,7 @@ tr:hover {
 }
 
 th, td {
-	padding: 5px;
+	padding: 7px;
 }
 
 table tr > td:first-child {
@@ -39,4 +38,8 @@ tbody tr td:first-child::before {
 
 #new-beer > td:first-child::before {
 	content: none;
+}
+
+#input-send {
+	background: lightgreen;
 }

@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
   console.log('Doc ready!');
+
+  // set input width first?
   getBeers();
 });
 
@@ -12,15 +14,6 @@ function getBeers() {
     console.log("Receiving the response");
 
     response.forEach((beer, index) => {
-      /*
-      var currentRow = document.getElementById('beer-table').rows[2];
-      var newRow = rowFromBeer(beer);
-      if (!currentRow && currentRow.childNodes[1].innerText != newRow.childNodes[1].innerText) {
-        
-      }
-      */
-
-      //document.getElementById('beer-table-body').append(rowFromBeer(beer));
       document.getElementById('beer-table-body').insertBefore(rowFromBeer(beer), document.getElementById('new-beer'));
     });
 
