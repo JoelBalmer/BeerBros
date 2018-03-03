@@ -31,10 +31,7 @@ beersRouter.get('/:id', (req, res, next) => {
 });
 
 // Create an expression
-beersRouter.post('/', (req, res, next) => {
-  console.log('hello');
-  console.log(req.query);
-  
+beersRouter.post('/', (req, res, next) => {  
   beers.push(req.query);
   res.send(req.query);
 

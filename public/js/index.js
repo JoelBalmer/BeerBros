@@ -1,17 +1,13 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
   console.log('Doc ready!');
 
-  // set input width first?
   getBeers();
 });
 
 // button handlers
 
 function getBeers() {
-  console.log("Making get request");
-
-  $.get("/beers/", function(response){
-    console.log("Receiving the response");
+  $.get('/beers/', function(response){
 
     response.forEach((beer, index) => {
       document.getElementById('beer-table-body').insertBefore(rowFromBeer(beer), document.getElementById('new-beer'));
@@ -22,45 +18,29 @@ function getBeers() {
 }
 
 function getBeer() {
-  console.log("Making get request");
-
   $.get('/beers/', function(response){
-    console.log("Receiving the response");
-
     document.getElementById("get-beers").innerHTML = response;
   });
 }
 
 function createBeer(button) {
-  console.log('Opening input area');
-
   document.getElementById('new-beer').hidden = false;
   button.disabled = true;
 }
 
 function updateBeer() {
-  console.log("Making get request");
-
   $.get("/beers/", function(response){
-    console.log("Receiving the response");
-
     document.getElementById("get-beers").innerHTML = response;
   });
 }
 
 function deleteBeer() {
-  console.log("Making get request");
-
   $.get("/beers/", function(response){
-    console.log("Receiving the response");
-
     document.getElementById("get-beers").innerHTML = response;
   }); 
 }
 
 const inputSend = () => {
-  console.log("Making post request");
-
   let url = "/beers/";
   let name = document.getElementById('input-name').value;
   let taste = document.getElementById('input-taste').value;
@@ -68,9 +48,7 @@ const inputSend = () => {
   url += "?name=" + name + "&taste=" + taste + "&look=" + look;
 
   $.post(url, function(response){
-    console.log("Receiving the response");
     document.getElementById('beer-table-body').insertBefore(rowFromBeer(response), document.getElementById('new-beer'));
-
     document.getElementById('create-beer').disabled = false;
     document.getElementById('new-beer').hidden = true;
     makeCellsClickable();
@@ -81,8 +59,6 @@ const inputSend = () => {
 
 const rowFromBeer = (beer) => {    
   let row = document.createElement('tr');
-
-  console.log(beer);
 
   // create row data
   let numberData = document.createElement('td');
