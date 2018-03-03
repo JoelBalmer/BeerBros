@@ -20,7 +20,8 @@ function getBeers() {
       }
       */
 
-      document.getElementById('beer-table-body').append(rowFromBeer(beer));
+      //document.getElementById('beer-table-body').append(rowFromBeer(beer));
+      document.getElementById('beer-table-body').insertBefore(rowFromBeer(beer), document.getElementById('new-beer'));
     });
 
     makeCellsClickable();
@@ -75,17 +76,11 @@ const inputSend = () => {
 
   $.post(url, function(response){
     console.log("Receiving the response");
-
-    //var newTable = createTableBody();
-    //newTable.append(rowFromBeer(response));
-    //document.getElementById('beer-table-body').append(rowFromBeer(response));
-
-    getBeers();
-
-    makeCellsClickable();
+    document.getElementById('beer-table-body').insertBefore(rowFromBeer(response), document.getElementById('new-beer'));
 
     document.getElementById('create-beer').disabled = false;
     document.getElementById('new-beer').hidden = true;
+    makeCellsClickable();
   });
 }
 
