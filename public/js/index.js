@@ -26,6 +26,7 @@ function getBeer() {
 function createBeer(button) {
   document.getElementById('new-beer').hidden = false;
   button.disabled = true;
+  button.style.background = 'salmon';
 }
 
 function updateBeer() {
@@ -50,6 +51,7 @@ const inputSend = () => {
   $.post(url, function(response){
     document.getElementById('beer-table-body').insertBefore(rowFromBeer(response), document.getElementById('new-beer'));
     document.getElementById('create-beer').disabled = false;
+    document.getElementById('create-beer').style.background = '';
     document.getElementById('new-beer').hidden = true;
     makeCellsClickable();
   });
