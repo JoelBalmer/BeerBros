@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/JoelBalmer/BeerBros#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "sqlite3": "^3.1.13"
   }
 }

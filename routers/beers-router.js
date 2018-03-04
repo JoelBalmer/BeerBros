@@ -1,17 +1,12 @@
 const express = require('express');
+const sqlite3 = require('sqlite3');
 
-let beers = [
-  {
-    name: 'Budvar',
-    taste: 'Not bad',
-    look: 'Normal'
-  },
-  {
-    name: 'Doubloon',
-    taste: 'Great',
-    look: 'Nice!'
-  }
-];
+// get beers
+let db = new sqlite3.Database('./beers.sqlite');
+db.all('SELECT * FROM beerTable', (error, rows) => {
+  console.log('logging rows...');
+  console.log(rows);
+});
 
 let beersRouter = express.Router();
 
