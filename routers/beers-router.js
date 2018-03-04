@@ -6,7 +6,6 @@ let beers = [];
 // get beers
 let db = new sqlite3.Database('./beers.sqlite');
 db.all('SELECT * FROM beerTable', (error, rows) => {
-
   // assign to local beers array
   beers = rows;
 });
@@ -21,13 +20,17 @@ beersRouter.get('/', (req, res, next) => {
 
 // create a beer
 beersRouter.post('/', (req, res, next) => {
+  // candidate to add to middle ware for all post requets to beer
+  req.query.id = beers.length + 1;
+
   // push beer to database
   db.run(
-    'INSERT INTO beerTable (name, taste, look) VALUES ($name, $taste, $look)',
+    'INSERT INTO beerTable (name, taste, look, id) VALUES ($name, $taste, $look, $id)',
     {
       $name: req.query.name,
       $taste: req.query.taste,
-      $look: req.query.look
+      $look: req.query.look,
+      $id: req.query.id
     },
     error => {
       if (error) {
@@ -35,7 +38,7 @@ beersRouter.post('/', (req, res, next) => {
         res.status(400).send('Could not create');
         return;
       }
-    }
+    }    
   );
 
   beers.push(req.query); 

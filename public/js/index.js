@@ -51,6 +51,7 @@ const inputSend = () => {
     document.getElementById('beer-table-body').insertBefore(rowFromBeer(response), document.getElementById('new-beer'));
     hideNewBeer();
     makeCellsClickable();
+    console.log(response);
   });
 }
 
@@ -75,6 +76,7 @@ const rowFromBeer = (beer) => {
   let tasteData = document.createElement('td');
   let lookData = document.createElement('td');
 
+  numberData.innerText = beer.id + 1;
   nameData.innerText = beer.name;
   tasteData.innerText = beer.taste;
   lookData.innerText = beer.look;
