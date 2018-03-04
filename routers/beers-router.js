@@ -58,6 +58,10 @@ beersRouter.put('/:id', (req, res, next) => {
 
 // Delete an expression
 beersRouter.delete('/:id', (req, res, next) => {
+
+  // need to reassign ids, or maybe go back
+  // to displaying with css (if we're to keep ids consistent?)
+
   const expressionIndex = getIndexById(req.params.id, expressions);
   if (expressionIndex !== -1) {
     expressions.splice(expressionIndex, 1);
