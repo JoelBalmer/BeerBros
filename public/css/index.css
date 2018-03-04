@@ -40,6 +40,16 @@ tbody tr td:first-child::before {
 	content: none;
 }
 
+#input-look {
+	display: inline;
+}
+
 #input-send {
 	background: lightgreen;
+	display: inline;
+	margin-left: 2px;
+}
+
+#cancel-beer {
+	background: #F08080;
 }

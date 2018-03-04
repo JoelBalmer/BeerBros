@@ -26,7 +26,6 @@ function getBeer() {
 function createBeer(button) {
   document.getElementById('new-beer').hidden = false;
   button.disabled = true;
-  button.style.background = 'salmon';
 }
 
 function updateBeer() {
@@ -48,13 +47,21 @@ const inputSend = () => {
   let look = document.getElementById('input-look').value;
   url += "?name=" + name + "&taste=" + taste + "&look=" + look;
 
-  $.post(url, function(response){
+  $.post(url, function(response) {
     document.getElementById('beer-table-body').insertBefore(rowFromBeer(response), document.getElementById('new-beer'));
-    document.getElementById('create-beer').disabled = false;
-    document.getElementById('create-beer').style.background = '';
-    document.getElementById('new-beer').hidden = true;
+    hideNewBeer();
     makeCellsClickable();
   });
+}
+
+const hideNewBeer = () => {
+  document.getElementById('create-beer').disabled = false;
+  var newBeer = document.getElementById('new-beer');
+  newBeer.hidden = true;
+  var list = newBeer.getElementsByTagName('input');
+  for (let i = 0; i < list.length; i++) {
+    list[i].value = '';
+  }
 }
 
 // private methods
