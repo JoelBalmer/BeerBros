@@ -1,13 +1,17 @@
 const express = require('express');
 const sqlite3 = require('sqlite3');
 
+let beers = [];
+
 // get beers
 let db = new sqlite3.Database('./beers.sqlite');
 db.all('SELECT * FROM beerTable', (error, rows) => {
-  console.log('logging rows...');
-  console.log(rows);
+
+  // assign to local beers array
+  beers = rows;
 });
 
+// use separate beer rooter file
 let beersRouter = express.Router();
 
 // Get all beers
@@ -15,29 +19,27 @@ beersRouter.get('/', (req, res, next) => {
 	res.send(beers);
 });
 
-// Get a single expression
-beersRouter.get('/:id', (req, res, next) => {
-  const foundExpression = getElementById(req.params.id, expressions);
-  if (foundExpression) {
-    res.send(foundExpression);
-  } else {
-    res.status(404).send();
-  }
-});
+// create a beer
+beersRouter.post('/', (req, res, next) => {
+  // push beer to database
+  db.run(
+    'INSERT INTO beerTable (name, taste, look) VALUES ($name, $taste, $look)',
+    {
+      $name: req.query.name,
+      $taste: req.query.taste,
+      $look: req.query.look
+    },
+    error => {
+      if (error) {
+        console.log(error);
+        res.status(400).send('Could not create');
+        return;
+      }
+    }
+  );
 
-// Create an expression
-beersRouter.post('/', (req, res, next) => {  
-  beers.push(req.query);
+  beers.push(req.query); 
   res.send(req.query);
-
-  /*
-  if (receivedExpression) {
-    expressions.push(receivedExpression);
-    res.status(201).send(receivedExpression);
-  } else {
-    res.status(400).send();
-  }
-  */
 });
 
 // Update an expression

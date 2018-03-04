@@ -1,8 +1,9 @@
-console.log('My server is running...');
-
+// setup expres server
 let express = require('express');
 let app = express();
 let server = app.listen(3000);
+
+console.log('My server is running...');
 
 // show public site
 app.use(express.static("public"));
@@ -12,10 +13,12 @@ const requestLogging = (req, res, next) => {
 	console.log(`A ${req.method} request was just made`);
 	next();
 }
+
 app.use(requestLogging);
 
 // handle the CRUD for beers
 const beersRouter = require('./routers/beers-router.js');
+
 app.use('/beers/', beersRouter);
 
 // error handling
@@ -27,4 +30,5 @@ const errorHandler = (err, req, res, next) => {
   res.status(err.status).send(err.message);
   next(err);
 };
+
 app.use(errorHandler);
