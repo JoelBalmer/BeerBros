@@ -20,7 +20,16 @@ beersRouter.get('/', (req, res, next) => {
 
 // create a beer
 beersRouter.post('/', (req, res, next) => {
-  // candidate to add to middle ware for all post requets to beer
+  // candidate to add to middle ware for all 'post requests' to beer
+  
+  /*
+  let newId = beers.length;
+  while(database.contains(newId)) {
+    newId++;
+  }
+  req.query.id = newId
+  */
+  
   req.query.id = beers.length + 1;
 
   // push beer to database
