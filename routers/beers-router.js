@@ -18,18 +18,22 @@ beersRouter.get('/', (req, res, next) => {
 	res.send(beers);
 });
 
+/*
+const addId = (req, res, next) => {
+  if (req.method === POST) {
+    var timeInSecs = new Date();
+    req.query.id = Math.floor(timeInSecs.getTime() / 1000);
+    next();
+  }
+}
+
+beersRouter.use('/', addId);
+*/
+
 // create a beer
 beersRouter.post('/', (req, res, next) => {
-  // candidate to add to middle ware for all 'post requests' to beer
-  
-  /*
-  let newId = beers.length;
-  while(database.contains(newId)) {
-    newId++;
-  }
-  req.query.id = newId
-  */
-  
+  // candidate to add to middle ware 
+  //for all 'post requests' to beer
   var timeInSecs = new Date();
   req.query.id = Math.floor(timeInSecs.getTime() / 1000);
 
