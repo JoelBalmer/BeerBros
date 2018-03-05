@@ -83,10 +83,20 @@ const rowFromBeer = (beer) => {
   lookData.innerText = beer.look;
   idData.innerText = beer.id;
 
+  // setup buttons to cancel or confirm editing
+  let editSuccessButton = document.createElement('Button');
+  editSuccessButton.id = 'edit-success';
+  editSuccessButton.hidden = true;
+  let editCancelButton = document.createElement('Button');
+  editCancelButton.id = 'edit-cancel';
+  editCancelButton.hidden = true;
+  
+  numberData.append(editSuccessButton);
   row.append(numberData);
   row.append(nameData);
   row.append(tasteData);
   row.append(lookData);
+  idData.append(editCancelButton);
   row.append(idData);
 
   return row;
@@ -100,7 +110,9 @@ const createTableBody = () => {
 
 const makeCellsClickable = () => {
   $('td').click(function() {
+    $('.selected').removeClass('selected');
     console.log(this.cellIndex + ', ' + this.parentNode.rowIndex);
     console.log(this.parentNode.lastElementChild.innerText);
+    this.parentNode.classList.add('selected');
   })
 }
