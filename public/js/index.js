@@ -117,11 +117,20 @@ const createTableBody = () => {
 
 const makeCellsClickable = () => {
   $('td').click(function() {
-    console.log($('.selected'));
+    let selected = $('.selected');
+    if (selected.length !== 0) {
+      let cancel = selected.find('.cancel-button')[0];
+      cancel.hidden = true;
+      let success = selected.find('.success-button')[0];
+      success.hidden = true;
+    }
+
     $('.selected').removeClass('selected');
+    
     this.parentNode.firstElementChild.lastElementChild.hidden = false;
     this.parentNode.lastElementChild.lastElementChild.hidden = false;
     this.parentNode.lastElementChild.firstElementChild.hidden = true;
     this.parentNode.classList.add('selected');
+    console.log(this.parentNode);
   })
 }
