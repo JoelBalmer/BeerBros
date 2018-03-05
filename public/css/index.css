@@ -43,15 +43,22 @@ tbody tr td:first-child::before {
 	content: none;
 }
 
+.selected > td:first-child::before {
+	content: none;
+}
+
 #input-look {
 	display: inline;
 }
 
-#input-send {
-	background: lightgreen;
-	display: inline;
+.cancel-button {
+	background: #F08080;
+	width:25px;
+	height:25px;
 }
 
-#cancel-beer {
-	background: #F08080;
+.success-button {
+	background: lightgreen;
+	width:25px;
+	height:25px;
 }

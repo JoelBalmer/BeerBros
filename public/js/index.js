@@ -86,18 +86,22 @@ const rowFromBeer = (beer) => {
   // setup buttons to cancel or confirm editing
   let editSuccessButton = document.createElement('Button');
   editSuccessButton.id = 'edit-success';
+  editSuccessButton.classList.add('success-button');
   editSuccessButton.hidden = true;
+
   let editCancelButton = document.createElement('Button');
   editCancelButton.id = 'edit-cancel';
+  editCancelButton.classList.add('cancel-button');
   editCancelButton.hidden = true;
   
-  numberData.append(editSuccessButton);
+  // add to row and return
+  numberData.append(editCancelButton);
   row.append(numberData);
   row.append(nameData);
   row.append(tasteData);
   row.append(lookData);
-  idData.append(editCancelButton);
   row.append(idData);
+  idData.append(editSuccessButton);
 
   return row;
 }
@@ -112,6 +116,9 @@ const makeCellsClickable = () => {
   $('td').click(function() {
     $('.selected').removeClass('selected');
     console.log(this.cellIndex + ', ' + this.parentNode.rowIndex);
+    this.parentNode.firstElementChild.lastElementChild.hidden = false;
+    this.parentNode.lastElementChild.lastElementChild.hidden = false;
+    this.parentNode.lastElementChild.firstElementChild
     console.log(this.parentNode.lastElementChild.innerText);
     this.parentNode.classList.add('selected');
   })

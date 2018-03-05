@@ -40,7 +40,7 @@
         <tbody id="beer-table-body">
           <tr id="new-beer" hidden>
             <td>
-              <button id="cancel-beer" onclick="hideNewBeer()">X</button>
+              <button id="cancel-beer" class="cancel-button" onclick="hideNewBeer()">X</button>
             </td>
             <td>
               <input id="input-name" type="text" placeholder="Enter name" autofocus="autofocus"/>
@@ -52,7 +52,7 @@
               <input id="input-look" type="text" placeholder="Enter look"/>
             </td>
             <td>
-              <button id="input-send" onclick="inputSend(this)">&check;
+              <button id="input-send" class="success-button" onclick="inputSend(this)">&check;
               </button>
             </td>
           </tr>
