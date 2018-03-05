@@ -75,16 +75,19 @@ const rowFromBeer = (beer) => {
   let nameData = document.createElement('td');
   let tasteData = document.createElement('td');
   let lookData = document.createElement('td');
+  let idData = document.createElement('td');
 
   // leave number data empty
   nameData.innerText = beer.name;
   tasteData.innerText = beer.taste;
   lookData.innerText = beer.look;
+  idData.innerText = beer.id;
 
   row.append(numberData);
   row.append(nameData);
   row.append(tasteData);
   row.append(lookData);
+  row.append(idData);
 
   return row;
 }
@@ -98,5 +101,6 @@ const createTableBody = () => {
 const makeCellsClickable = () => {
   $('td').click(function() {
     console.log(this.cellIndex + ', ' + this.parentNode.rowIndex);
+    console.log(this.parentNode.lastElementChild.innerText);
   })
 }

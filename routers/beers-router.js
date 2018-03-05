@@ -32,8 +32,7 @@ beersRouter.use('/', addId);
 
 // create a beer
 beersRouter.post('/', (req, res, next) => {
-  // candidate to add to middle ware 
-  //for all 'post requests' to beer
+  // should use middleware for this idea, ideally
   var timeInSecs = new Date();
   req.query.id = Math.floor(timeInSecs.getTime() / 1000);
 
@@ -55,6 +54,7 @@ beersRouter.post('/', (req, res, next) => {
     }    
   );
 
+  // return beer in request
   beers.push(req.query); 
   res.send(req.query);
 });

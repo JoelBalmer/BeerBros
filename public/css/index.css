@@ -20,8 +20,9 @@ tr:nth-child(odd) {
 	background-color: #dddddd;
 }
 
-tr:hover {
+tr:not(#beer-table-head-row):hover {
 	background: lightBlue;
+	cursor: pointer;
 }
 
 th, td {
@@ -42,7 +43,6 @@ tbody tr td:first-child::before {
 	content: none;
 }
 
-
 #input-look {
 	display: inline;
 }
@@ -50,7 +50,6 @@ tbody tr td:first-child::before {
 #input-send {
 	background: lightgreen;
 	display: inline;
-	margin-left: 2px;
 }
 
 #cancel-beer {

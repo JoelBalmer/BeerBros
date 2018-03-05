@@ -28,18 +28,19 @@
       &nbsp;
       <p id="feedback">Here are your beers</p>
       <table id="beer-table">
-        <thead>
-          <tr>
+        <thead id="beer-table-head">
+          <tr id="beer-table-head-row">
             <th>No.</th>
             <th>Name</th>
             <th>Taste</th>
             <th>Look</th>
+            <th>ID</th>
           </tr>
         </thead>
         <tbody id="beer-table-body">
           <tr id="new-beer" hidden>
             <td>
-              <button id="cancel-beer" onclick="hideNewBeer(this)">X</button>
+              <button id="cancel-beer" onclick="hideNewBeer()">X</button>
             </td>
             <td>
               <input id="input-name" type="text" placeholder="Enter name" autofocus="autofocus"/>
@@ -49,7 +50,10 @@
             </td>
             <td>
               <input id="input-look" type="text" placeholder="Enter look"/>
-              <button id="input-send" onclick="inputSend(this)">&check;</button>
+            </td>
+            <td>
+              <button id="input-send" onclick="inputSend(this)">&check;
+              </button>
             </td>
           </tr>
         </tbody>
