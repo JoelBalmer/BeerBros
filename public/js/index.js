@@ -76,7 +76,7 @@ const rowFromBeer = (beer) => {
   let tasteData = document.createElement('td');
   let lookData = document.createElement('td');
 
-  numberData.innerText = beer.id + 1;
+  // leave number data empty
   nameData.innerText = beer.name;
   tasteData.innerText = beer.taste;
   lookData.innerText = beer.look;

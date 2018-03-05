@@ -30,7 +30,8 @@ beersRouter.post('/', (req, res, next) => {
   req.query.id = newId
   */
   
-  req.query.id = beers.length + 1;
+  var timeInSecs = new Date();
+  req.query.id = Math.floor(timeInSecs.getTime() / 1000);
 
   // push beer to database
   db.run(

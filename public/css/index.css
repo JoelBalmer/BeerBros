@@ -28,7 +28,7 @@ th, td {
 	padding: 7px;
 }
 
-/*
+
 table tr > td:first-child {
 	counter-increment: rowNumber;
 }
@@ -41,7 +41,7 @@ tbody tr td:first-child::before {
 #new-beer > td:first-child::before {
 	content: none;
 }
-*/
+
 
 #input-look {
 	display: inline;
