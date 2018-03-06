@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 // button handlers
-
 function getBeers() {
   $.get('/beers/', function(response){
 
@@ -30,15 +29,21 @@ function createBeer(button) {
 }
 
 function updateBeer() {
-  $.get("/beers/", function(response){
+  $.get("/beers/", function(response) {
     document.getElementById("get-beers").innerHTML = response;
   });
 }
 
-function deleteBeer() {
-  $.get("/beers/", function(response){
-    document.getElementById("get-beers").innerHTML = response;
-  }); 
+function deleteBeer(id) {
+  let url = '/beers/' + id;
+
+  $.ajax({
+    url: url,
+    type: 'DELETE',
+    success: function(response) {
+      console.log(response);
+    }
+  });
 }
 
 const inputSend = () => {
@@ -58,9 +63,9 @@ const inputSend = () => {
 
 const hideNewBeer = () => {
   document.getElementById('create-beer').disabled = false;
-  var newBeer = document.getElementById('new-beer');
+  let newBeer = document.getElementById('new-beer');
   newBeer.hidden = true;
-  var list = newBeer.getElementsByTagName('input');
+  let list = newBeer.getElementsByTagName('input');
   for (let i = 0; i < list.length; i++) {
     list[i].value = '';
   }
@@ -97,12 +102,7 @@ const rowFromBeer = (beer) => {
   deleteButton.classList.add('cancel-button');
   deleteButton.hidden = true;
   deleteButton.innerText = 'X';
-  deleteButton.addEventListener('click', function(e){
-    var deleteConfirm = confirm('Are you sure you want to delete this beer?');
-    if (deleteConfirm) {
-      var id = e.target.parentNode.parentNode.lastElementChild.firstElementChild.innerText;
-    }
-  });
+  deleteButton.addEventListener('click', deleteHandler);
   
   // add to row and return
   numberData.append(deleteButton);
@@ -114,6 +114,16 @@ const rowFromBeer = (beer) => {
   idData.append(editSuccessButton);
 
   return row;
+}
+
+const deleteHandler = (event) => {
+  let deleteConfirm = confirm('Are you sure you want to delete this beer?');
+  if (!deleteConfirm) {
+    return;
+  }
+
+  let id = event.target.parentNode.parentNode.lastElementChild.firstElementChild.innerText;
+  deleteBeer(id);
 }
 
 const createTableBody = () => {
