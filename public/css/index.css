@@ -53,12 +53,14 @@ tbody tr td:first-child::before {
 
 .cancel-button {
 	background: #F08080;
-	width:25px;
-	height:25px;
+	width:20px;
+	height:20px;
+	padding: 0px;
 }
 
 .success-button {
 	background: lightgreen;
-	width:25px;
-	height:25px;
+	width:20px;
+	height:20px;
+	padding: 0px;
 }

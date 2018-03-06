@@ -25,6 +25,7 @@ function getBeer() {
 
 function createBeer(button) {
   document.getElementById('new-beer').hidden = false;
+  deselectRow();
   button.disabled = true;
 }
 
@@ -91,11 +92,13 @@ const rowFromBeer = (beer) => {
   editSuccessButton.id = 'edit-success';
   editSuccessButton.classList.add('success-button');
   editSuccessButton.hidden = true;
+  editSuccessButton.innerHTML = '&check;';
 
   let editCancelButton = document.createElement('Button');
   editCancelButton.id = 'edit-cancel';
   editCancelButton.classList.add('cancel-button');
   editCancelButton.hidden = true;
+  editCancelButton.innerText = 'X';
   
   // add to row and return
   numberData.append(editCancelButton);
@@ -115,17 +118,28 @@ const createTableBody = () => {
   return tableBody;
 }
 
-const makeCellsClickable = () => {
-  $('td').click(function() {
-    let selected = $('.selected');
-    if (selected.length !== 0) {
-      let cancel = selected.find('.cancel-button')[0];
-      cancel.hidden = true;
-      let success = selected.find('.success-button')[0];
-      success.hidden = true;
-    }
+const deselectRow = () => {
+  let selected = $('.selected');
+    
+  if (selected.length !== 0) {
+    let cancel = selected.find('.cancel-button')[0];
+    cancel.hidden = true;
+    let success = selected.find('.success-button')[0];
+    success.hidden = true;
+    selected[0].lastElementChild.firstElementChild.hidden = false;
+  }
 
     $('.selected').removeClass('selected');
+}
+
+const makeCellsClickable = () => {
+  $('td').click(function() {
+    if (this.parentNode === document.getElementById('new-beer')) {
+      return;
+    }
+
+    hideNewBeer();
+    deselectRow();
     
     this.parentNode.firstElementChild.lastElementChild.hidden = false;
     this.parentNode.lastElementChild.lastElementChild.hidden = false;
