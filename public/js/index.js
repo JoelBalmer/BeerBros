@@ -89,19 +89,23 @@ const rowFromBeer = (beer) => {
 
   // setup buttons to cancel or confirm editing
   let editSuccessButton = document.createElement('Button');
-  editSuccessButton.id = 'edit-success';
   editSuccessButton.classList.add('success-button');
   editSuccessButton.hidden = true;
   editSuccessButton.innerHTML = '&check;';
 
-  let editCancelButton = document.createElement('Button');
-  editCancelButton.id = 'edit-cancel';
-  editCancelButton.classList.add('cancel-button');
-  editCancelButton.hidden = true;
-  editCancelButton.innerText = 'X';
+  let deleteButton = document.createElement('Button');
+  deleteButton.classList.add('cancel-button');
+  deleteButton.hidden = true;
+  deleteButton.innerText = 'X';
+  deleteButton.addEventListener('click', function(e){
+    var deleteConfirm = confirm('Are you sure you want to delete this beer?');
+    if (deleteConfirm) {
+      var id = e.target.parentNode.parentNode.lastElementChild.firstElementChild.innerText;
+    }
+  });
   
   // add to row and return
-  numberData.append(editCancelButton);
+  numberData.append(deleteButton);
   row.append(numberData);
   row.append(nameData);
   row.append(tasteData);
@@ -145,6 +149,5 @@ const makeCellsClickable = () => {
     this.parentNode.lastElementChild.lastElementChild.hidden = false;
     this.parentNode.lastElementChild.firstElementChild.hidden = true;
     this.parentNode.classList.add('selected');
-    console.log(this.parentNode);
   })
 }
