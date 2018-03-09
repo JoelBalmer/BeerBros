@@ -45,6 +45,9 @@ function deleteBeer(id) {
     type: 'DELETE',
     success: function(response) {
       console.log("Receiving delete response");
+      let table = document.getElementById('beer-table-body');
+      var row = document.getElementsByClassName('selected')[0];
+      table.deleteRow(row.sectionRowIndex);
     }
   });
 }

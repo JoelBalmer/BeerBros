@@ -64,12 +64,13 @@ beersRouter.post('/', (req, res, next) => {
         res.status(400).send('Could not create');
         return;
       }
+      else {
+        // return beer in request
+        beers.push(req.query); 
+        res.send(req.query);
+      }
     }    
   );
-
-  // return beer in request
-  beers.push(req.query); 
-  res.send(req.query);
 });
 
 // Update an expression
@@ -103,11 +104,12 @@ beersRouter.delete('/:id', (req, res, next) => {
         res.status(400).send('Could not delete beer from database');
         return;
       }
+      else {
+        // reload beer table
+        res.status(204).send("Beer successfully deleted");
+      }
     }
   );
-
-  // reload beer table
-  res.status(204).send("Beer successfully deleted");
 
   /*
   const delete = getIndexById(req.params.id, expressions);
