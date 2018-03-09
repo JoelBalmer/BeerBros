@@ -20,7 +20,7 @@ tr:nth-child(odd) {
 	background-color: #dddddd;
 }
 
-tr:not(#beer-table-head-row):hover {
+tr:not(#beer-table-head-row):not(#new-beer):hover {
 	background: lightBlue;
 	cursor: pointer;
 }

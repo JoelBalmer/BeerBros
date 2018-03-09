@@ -6,21 +6,39 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 // button handlers
 function getBeers() {
-  $.get('/beers/', function(response){
-
-    console.log('beers have been got!');
+  $.get('/beers/', function(response) {
+    console.log('the response in index.js');
     console.log(response);
 
+    // the code should
+    // 1. iterate over current table, replacing data
+    // 2. if new beer has been added data, add using the current method
+    // 3. if a beer has been deleted, the database will have less rows
+
+    /*
+    for (let i = 0; i < table.rows.length; i++) {
+        let row = table.rows[i];
+        if (!row.id) {
+          console.log(row);
+        }
+      }
+    */
+
+    let newTable = createTableBody();
+    let oldTable = document.getElementById('beer-table-body');
+
     response.forEach((beer, index) => {
-      document.getElementById('beer-table-body').insertBefore(rowFromBeer(beer), document.getElementById('new-beer'));
+      //table.insertBefore(rowFromBeer(beer), document.getElementById('new-beer'));
+      newTable.append(rowFromBeer(beer));
     });
 
+    oldTable.replaceWith(newTable);
     makeCellsClickable();
   });
 }
 
 function getBeer() {
-  $.get('/beers/', function(response){
+  $.get('/beers/', function(response) {
     document.getElementById("get-beers").innerHTML = response;
   });
 }
@@ -45,9 +63,8 @@ function deleteBeer(id) {
     type: 'DELETE',
     success: function(response) {
       console.log("Receiving delete response");
-      let table = document.getElementById('beer-table-body');
-      var row = document.getElementsByClassName('selected')[0];
-      table.deleteRow(row.sectionRowIndex);
+      console.log(response);
+      getBeers();
     }
   });
 }
@@ -60,10 +77,12 @@ const inputSend = () => {
   url += "?name=" + name + "&taste=" + taste + "&look=" + look;
 
   $.post(url, function(response) {
-    document.getElementById('beer-table-body').insertBefore(rowFromBeer(response), document.getElementById('new-beer'));
+    getBeers();
     hideNewBeer();
-    makeCellsClickable();
-    console.log(response);
+
+    // document.getElementById('beer-table-body').insertBefore(rowFromBeer(response), document.getElementById('new-beer'));
+    // makeCellsClickable();
+    // console.log(response);
   });
 }
 

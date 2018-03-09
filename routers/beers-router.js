@@ -8,8 +8,13 @@ let beersLookup = {};
 let db = new sqlite3.Database('./beers.sqlite');
 
 const getBeersFromDB = () => {
+  console.log('the response in beers-router.js 1');
+  console.log(beers);
+
   db.all('SELECT * FROM beerTable', (error, rows) => {
     beers = rows;
+    console.log('the response in beers-router.js 2');
+    console.log(beers);
   });
 }
 
@@ -27,21 +32,8 @@ beersRouter.get('/', (req, res, next) => {
   for (let i = 0, len = beers.length; i < len; i++) {
     beersLookup[beers[i].id] = beers[i];
   }
-
 	res.send(beers);
 });
-
-/*
-const addId = (req, res, next) => {
-  if (req.method === POST) {
-    var timeInSecs = new Date();
-    req.query.id = Math.floor(timeInSecs.getTime() / 1000);
-    next();
-  }
-}
-
-beersRouter.use('/', addId);
-*/
 
 // create a beer
 beersRouter.post('/', (req, res, next) => {
@@ -86,9 +78,8 @@ beersRouter.put('/:id', (req, res, next) => {
 
 // Delete a beer
 beersRouter.delete('/:id', (req, res, next) => {
-  let beerIndex = beersLookup[req.params.id].indexOf;
-
-  if (beerIndex === -1) {
+  let beer = beersLookup[req.params.id];
+  if (!beer) {
     res.status(404).send("This beer isn't in your collection!");
     return;
   }
@@ -105,22 +96,11 @@ beersRouter.delete('/:id', (req, res, next) => {
         return;
       }
       else {
-        // reload beer table
-        res.status(204).send("Beer successfully deleted");
+        getBeersFromDB();
+        res.status(204).send(beers);
       }
     }
   );
-
-  /*
-  const delete = getIndexById(req.params.id, expressions);
-  if (expressionIndex !== -1) {
-    expressions.splice(expressionIndex, 1);
-    res.status(204).send();
-  } else {
-    res.status(404).send();
-  }
-  */
-
 });
 
 module.exports = beersRouter;
