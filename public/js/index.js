@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function getBeers() {
   $.get('/beers/', function(response){
 
+    console.log('beers have been got!');
+    console.log(response);
+
     response.forEach((beer, index) => {
       document.getElementById('beer-table-body').insertBefore(rowFromBeer(beer), document.getElementById('new-beer'));
     });
@@ -41,7 +44,7 @@ function deleteBeer(id) {
     url: url,
     type: 'DELETE',
     success: function(response) {
-      console.log(response);
+      console.log("Receiving delete response");
     }
   });
 }

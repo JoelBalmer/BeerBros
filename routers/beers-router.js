@@ -2,19 +2,32 @@ const express = require('express');
 const sqlite3 = require('sqlite3');
 
 let beers = [];
+let beersLookup = {};
 
-// get beers
+// get database
 let db = new sqlite3.Database('./beers.sqlite');
-db.all('SELECT * FROM beerTable', (error, rows) => {
-  // assign to local beers array
-  beers = rows;
-});
+
+const getBeersFromDB = () => {
+  db.all('SELECT * FROM beerTable', (error, rows) => {
+    beers = rows;
+  });
+}
+
+// initialise
+getBeersFromDB();
 
 // use separate beer rooter file
 let beersRouter = express.Router();
 
 // Get all beers
 beersRouter.get('/', (req, res, next) => {
+  getBeersFromDB();
+
+  // update lookup
+  for (let i = 0, len = beers.length; i < len; i++) {
+    beersLookup[beers[i].id] = beers[i];
+  }
+
 	res.send(beers);
 });
 
@@ -72,7 +85,30 @@ beersRouter.put('/:id', (req, res, next) => {
 
 // Delete a beer
 beersRouter.delete('/:id', (req, res, next) => {
-  
+  let beerIndex = beersLookup[req.params.id].indexOf;
+
+  if (beerIndex === -1) {
+    res.status(404).send("This beer isn't in your collection!");
+    return;
+  }
+
+  db.run(
+    'DELETE FROM beerTable WHERE id = $id',
+    {
+      $id: req.params.id
+    },
+    error => {
+      if (error) {
+        console.log(error);
+        res.status(400).send('Could not delete beer from database');
+        return;
+      }
+    }
+  );
+
+  // reload beer table
+  res.status(204).send("Beer successfully deleted");
+
   /*
   const delete = getIndexById(req.params.id, expressions);
   if (expressionIndex !== -1) {
@@ -82,7 +118,7 @@ beersRouter.delete('/:id', (req, res, next) => {
     res.status(404).send();
   }
   */
-  
+
 });
 
 module.exports = beersRouter;
