@@ -104,14 +104,24 @@ const rowFromBeer = (beer) => {
   // create row data
   let numberData = document.createElement('td');
   let nameData = document.createElement('td');
+  let breweryData = document.createElement('td');
   let tasteData = document.createElement('td');
+  let tasteScore = document.createElement('td');
   let lookData = document.createElement('td');
+  let lookScore = document.createElement('td');
+  let overallData = document.createElement('td');
+  let overallScore = document.createElement('td');
   let idData = document.createElement('td');
 
   // leave number data empty
   nameData.innerText = beer.name;
+  breweryData.innerText = beer.brewery;
   tasteData.innerText = beer.taste;
+  tasteScore.innerText = beer.taste_score;
   lookData.innerText = beer.look;
+  lookScore.innerText = beer.look_score;
+  overallData.innerText = beer.overall;
+  overallScore.innerText = beer.taste_score + beer.look_score;
   let span = document.createElement('span');
   span.id = 'id-span';
   span.innerText = beer.id;
@@ -133,8 +143,13 @@ const rowFromBeer = (beer) => {
   numberData.append(deleteButton);
   row.append(numberData);
   row.append(nameData);
+  row.append(breweryData);
   row.append(tasteData);
+  row.append(tasteScore);
   row.append(lookData);
+  row.append(lookScore);
+  row.append(overallData);
+  row.append(overallScore);
   row.append(idData);
   idData.append(editSuccessButton);
 

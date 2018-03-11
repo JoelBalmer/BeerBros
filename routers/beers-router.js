@@ -8,13 +8,8 @@ let beersLookup = {};
 let db = new sqlite3.Database('./beers.sqlite');
 
 const getBeersFromDB = () => {
-  console.log('the response in beers-router.js 1');
-  console.log(beers);
-
   db.all('SELECT * FROM beerTable', (error, rows) => {
     beers = rows;
-    console.log('the response in beers-router.js 2');
-    console.log(beers);
   });
 }
 
@@ -43,11 +38,15 @@ beersRouter.post('/', (req, res, next) => {
 
   // push beer to database
   db.run(
-    'INSERT INTO beerTable (name, taste, look, id) VALUES ($name, $taste, $look, $id)',
+    'INSERT INTO beerTable (name, brewery, taste, taste_score, look, look_score, overall, id) VALUES ($name, $brewery, $taste, $taste_score, $look, $look_score, $overall, $id)',
     {
       $name: req.query.name,
+      $brewery: req.query.brewery,
       $taste: req.query.taste,
+      $taste_score: req.query.taste_score,
       $look: req.query.look,
+      $look_score: req.query.look_score,
+      $overall: req.query.overall,
       $id: req.query.id
     },
     error => {
