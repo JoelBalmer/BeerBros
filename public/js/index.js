@@ -100,6 +100,7 @@ const hideNewBeer = () => {
 
 const rowFromBeer = (beer) => {    
   let row = document.createElement('tr');
+  row.id = beer.id;
 
   // create row data
   let numberData = document.createElement('td');
@@ -122,10 +123,10 @@ const rowFromBeer = (beer) => {
   lookScore.innerText = beer.look_score;
   overallData.innerText = beer.overall;
   overallScore.innerText = beer.taste_score + beer.look_score;
-  let span = document.createElement('span');
-  span.id = 'id-span';
-  span.innerText = beer.id;
-  idData.append(span);
+
+  tasteScore.style.color = '#337ab7';
+  lookScore.style.color = '#337ab7';
+  overallScore.style.color = '#337ab7';
 
   // setup buttons to cancel or confirm editing
   let editSuccessButton = document.createElement('Button');
@@ -150,7 +151,6 @@ const rowFromBeer = (beer) => {
   row.append(lookScore);
   row.append(overallData);
   row.append(overallScore);
-  row.append(idData);
   idData.append(editSuccessButton);
 
   return row;
@@ -162,7 +162,7 @@ const deleteHandler = (event) => {
     return;
   }
 
-  let id = event.target.parentNode.parentNode.lastElementChild.firstElementChild.innerText;
+  let id = event.target.parentNode.parentNode.id;
   deleteBeer(id);
 }
 
