@@ -2,6 +2,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
   console.log('Doc ready!');
 
   getBeers();
+
+  document.addEventListener('click', event => {
+    if (!$(event.target).closest('#beer-table').length) {
+      deselectRow();
+    }
+  });
 });
 
 // button handlers
@@ -168,7 +174,7 @@ const deselectRow = () => {
     //selected[0].lastElementChild.firstElementChild.hidden = false;
   }
 
-    $('.selected').removeClass('selected');
+  $('.selected').removeClass('selected');
 }
 
 const makeCellsClickable = () => {

@@ -24,6 +24,10 @@ tr:nth-child(odd) {
 	background-color: #dddddd;
 }
 
+.selected > td {
+	background: #aaefbc;
+}
+
 tr:not(#beer-table-head-row):not(#new-beer):hover {
 	background: lightBlue;
 	cursor: pointer;
