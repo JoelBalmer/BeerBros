@@ -32,13 +32,25 @@
           <tr id="beer-table-head-row">
             <th>No.</th>
             <th>Name</th>
-            <th>Brewery&nbsp;&nbsp;&nbsp;&nbsp;<a href="googe.co.uk">&uarr;</a></th>
+            <th>Brewery&nbsp;&nbsp;&nbsp;&nbsp;
+              <a id="brewery" href="#" onclick="getBeers(this); return false;">&uarr;
+              </a>
+            </th>
             <th>Taste</th>
-            <th><a href="googe.co.uk">&uarr;</a></th>
+            <th>
+              <a id="taste_score" href="#" onclick="getBeers(this); return false;">&uarr;
+              </a>
+            </th>
             <th>Look</th>
-            <th><a href="googe.co.uk">&uarr;</a></th>
+            <th>
+              <a id="look_score" href="#" onclick="getBeers(this); return false;">&uarr;
+              </a>
+            </th>
             <th>Overall</th>
-            <th><a href="googe.co.uk">&uarr;</a></th>
+            <th>
+              <a id="overall_score" href="#" onclick="getBeers(this); return false;">&uarr;
+              </a>
+            </th>
           </tr>
         </thead>
         <tbody id="beer-table-body">

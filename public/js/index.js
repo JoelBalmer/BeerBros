@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
   console.log('Doc ready!');
 
-  getBeers();
+  getBeers(null);
 
   document.addEventListener('click', event => {
     if (!$(event.target).closest('#beer-table').length) {
@@ -11,10 +11,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 // button handlers
-function getBeers() {
-  $.get('/beers/', function(response) {
-    console.log('the response in index.js');
-    console.log(response);
+function getBeers(element) {
+  let orderBy = 'id';
+  if (element) {
+    orderBy = element.id;
+  }
+
+  $.get('/beers/?order_by=' + orderBy, function(response) {
 
     let newTable = createTableBody();
     let oldTable = document.getElementById('beer-table-body');
@@ -55,7 +58,7 @@ function deleteBeer(id) {
     success: function(response) {
       console.log("Receiving delete response");
       console.log(response);
-      getBeers();
+      getBeers(null);
     }
   });
 }
@@ -72,7 +75,7 @@ const inputSend = () => {
   url += "?name=" + name + "&brewery=" + brewery + "&taste=" + taste + "&taste_score=" + tasteScore + "&look=" + look + "&look_score=" + lookScore + "&overall=" + overall;
 
   $.post(url, function(response) {
-    getBeers();
+    getBeers(null);
     hideNewBeer();
   });
 }

@@ -7,10 +7,15 @@ let beersLookup = {};
 // get database
 let db = new sqlite3.Database('./beers.sqlite');
 
-const getBeersFromDB = () => {
-  db.all('SELECT * FROM beerTable', (error, rows) => {
-    beers = rows;
-  });
+const getBeersFromDB = (orderBy) => {
+  db.all(
+    'SELECT * FROM beerTable ORDER BY $order_by ASC',
+    {
+      $order_by: orderBy
+    },
+    (error, rows) => {
+      beers = rows;
+    });
 }
 
 // initialise
@@ -21,7 +26,7 @@ let beersRouter = express.Router();
 
 // Get all beers
 beersRouter.get('/', (req, res, next) => {
-  getBeersFromDB();
+  getBeersFromDB(req.query.order_by);
 
   // update lookup
   for (let i = 0, len = beers.length; i < len; i++) {
