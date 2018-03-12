@@ -16,6 +16,10 @@ table {
 	counter-reset: rowNumber;
 }
 
+input {
+	width: 70px;
+}
+
 tr:nth-child(odd) {
 	background-color: #dddddd;
 }
