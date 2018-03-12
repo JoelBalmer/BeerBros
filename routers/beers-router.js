@@ -9,9 +9,9 @@ let db = new sqlite3.Database('./beers.sqlite');
 
 const getBeersFromDB = (orderBy) => {
   db.all(
-    'SELECT * FROM beerTable ORDER BY $order_by ASC',
+    'SELECT * FROM beerTable ORDER BY $order ASC',
     {
-      $order_by: orderBy
+      $order: orderBy
     },
     (error, rows) => {
       beers = rows;
@@ -19,7 +19,7 @@ const getBeersFromDB = (orderBy) => {
 }
 
 // initialise
-getBeersFromDB();
+getBeersFromDB('id');
 
 // use separate beer rooter file
 let beersRouter = express.Router();

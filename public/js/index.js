@@ -12,12 +12,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 // button handlers
 function getBeers(element) {
-  let orderBy = 'id';
+  let orderBy = 'brewery';
   if (element) {
     orderBy = element.id;
   }
 
   $.get('/beers/?order_by=' + orderBy, function(response) {
+
+    debugger;
 
     let newTable = createTableBody();
     let oldTable = document.getElementById('beer-table-body');
