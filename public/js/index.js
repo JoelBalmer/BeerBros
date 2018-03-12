@@ -10,25 +10,10 @@ function getBeers() {
     console.log('the response in index.js');
     console.log(response);
 
-    // the code should
-    // 1. iterate over current table, replacing data
-    // 2. if new beer has been added data, add using the current method
-    // 3. if a beer has been deleted, the database will have less rows
-
-    /*
-    for (let i = 0; i < table.rows.length; i++) {
-        let row = table.rows[i];
-        if (!row.id) {
-          console.log(row);
-        }
-      }
-    */
-
     let newTable = createTableBody();
     let oldTable = document.getElementById('beer-table-body');
 
     response.forEach((beer, index) => {
-      //table.insertBefore(rowFromBeer(beer), document.getElementById('new-beer'));
       newTable.append(rowFromBeer(beer));
     });
 
@@ -72,17 +57,17 @@ function deleteBeer(id) {
 const inputSend = () => {
   let url = "/beers/";
   let name = document.getElementById('input-name').value;
+  let brewery = document.getElementById('input-brewery').value;
   let taste = document.getElementById('input-taste').value;
+  let tasteScore = document.getElementById('input-taste-score').value;
   let look = document.getElementById('input-look').value;
-  url += "?name=" + name + "&taste=" + taste + "&look=" + look;
+  let lookScore = document.getElementById('input-look-score').value;
+  let overall = document.getElementById('input-overall').value;
+  url += "?name=" + name + "&brewery=" + brewery + "&taste=" + taste + "&taste_score=" + tasteScore + "&look=" + look + "&look_score=" + lookScore + "&overall=" + overall;
 
   $.post(url, function(response) {
     getBeers();
     hideNewBeer();
-
-    // document.getElementById('beer-table-body').insertBefore(rowFromBeer(response), document.getElementById('new-beer'));
-    // makeCellsClickable();
-    // console.log(response);
   });
 }
 
@@ -122,7 +107,7 @@ const rowFromBeer = (beer) => {
   lookData.innerText = beer.look;
   lookScore.innerText = beer.look_score;
   overallData.innerText = beer.overall;
-  overallScore.innerText = beer.taste_score + beer.look_score;
+  overallScore.innerText = (Number(beer.taste_score) + Number(beer.look_score));
 
   tasteScore.style.color = '#337ab7';
   lookScore.style.color = '#337ab7';
@@ -178,9 +163,9 @@ const deselectRow = () => {
   if (selected.length !== 0) {
     let cancel = selected.find('.cancel-button')[0];
     cancel.hidden = true;
-    let success = selected.find('.success-button')[0];
-    success.hidden = true;
-    selected[0].lastElementChild.firstElementChild.hidden = false;
+    //let success = selected.find('.success-button')[0];
+    //success.hidden = true;
+    //selected[0].lastElementChild.firstElementChild.hidden = false;
   }
 
     $('.selected').removeClass('selected');
@@ -196,8 +181,8 @@ const makeCellsClickable = () => {
     deselectRow();
     
     this.parentNode.firstElementChild.lastElementChild.hidden = false;
-    this.parentNode.lastElementChild.lastElementChild.hidden = false;
-    this.parentNode.lastElementChild.firstElementChild.hidden = true;
+    //this.parentNode.lastElementChild.lastElementChild.hidden = false;
+    //this.parentNode.lastElementChild.firstElementChild.hidden = true;
     this.parentNode.classList.add('selected');
   })
 }
