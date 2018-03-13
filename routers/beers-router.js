@@ -15,15 +15,17 @@ const getBeersFromDB = orderBy => {
 
   let sql = 'SELECT * FROM beerTable' + orderString;
   
-  db.all(
-    sql,
-    (err, rows) => {
-      console.log('inside before');
-      console.log(beers);
-      beers = rows;
-      console.log('inside after');
-      console.log(beers);
-    }
+  db.serialize(
+    db.all(
+      sql,
+      (err, rows) => {
+        console.log('inside before');
+        console.log(beers);
+        beers = rows;
+        console.log('inside after');
+        console.log(beers);
+      }
+    );
   );
 }
 
@@ -83,7 +85,8 @@ beersRouter.post('/', (req, res, next) => {
   );
 });
 
-// Update an expression
+// Update a beer
+/*
 beersRouter.put('/:id', (req, res, next) => {
   const expressionIndex = getIndexById(req.params.id, expressions);
   if (expressionIndex !== -1) {
@@ -93,6 +96,7 @@ beersRouter.put('/:id', (req, res, next) => {
     res.status(404).send();
   }
 });
+*/
 
 // Delete a beer
 beersRouter.delete('/:id', (req, res, next) => {
