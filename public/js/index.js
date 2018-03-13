@@ -1,4 +1,4 @@
-let sortDirection = "ASC";
+let sortDirection = "DESC";
 let sortType = "id";
 
 document.addEventListener("DOMContentLoaded", function(event) { 
@@ -126,7 +126,7 @@ const rowFromBeer = (beer) => {
   lookData.innerText = beer.look;
   lookScore.innerText = beer.look_score;
   overallData.innerText = beer.overall;
-  overallScore.innerText = (Number(beer.taste_score) + Number(beer.look_score));
+  overallScore.innerText = beer.overall_score;
 
   tasteScore.style.color = '#337ab7';
   lookScore.style.color = '#337ab7';

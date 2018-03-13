@@ -3,29 +3,35 @@ const sqlite3 = require('sqlite3');
 
 let beers = [];
 let beersLookup = {};
+let sortDirection = "DESC";
+let sortType = "id";
 
 // get database
 let db = new sqlite3.Database('./beers.sqlite');
 
-const getBeersFromDB = orderBy => {
+const getBeersFromDB = (orderBy, callback) => {
   let orderString = "";
   if (orderBy) {
-    orderString = ' ORDER BY ' + orderBy + ' ' + 'ASC';
+    sortType = orderBy;
+    orderString = ' ORDER BY ' + sortType + ' ' + sortDirection;
   }
 
   let sql = 'SELECT * FROM beerTable' + orderString;
   
-  db.serialize(
-    db.all(
-      sql,
-      (err, rows) => {
-        console.log('inside before');
-        console.log(beers);
-        beers = rows;
-        console.log('inside after');
-        console.log(beers);
+  db.all(
+    sql,
+    (err, rows) => {
+      console.log('inside before');
+      console.log(beers);
+      
+      beers = rows;
+      if (callback) {
+        callback(beers);
       }
-    );
+
+      console.log('inside after');
+      console.log(beers);
+    }
   );
 }
 
@@ -39,16 +45,16 @@ let beersRouter = express.Router();
 beersRouter.get('/', (req, res, next) => {
   console.log('Returning beers before sql');
   console.log(beers);
-  getBeersFromDB(req.query.order_by);
+  getBeersFromDB(req.query.order_by, function(response){
+    // update lookup
+    for (let i = 0, len = response.length; i < len; i++) {
+      beersLookup[response[i].id] = response[i];
+    }
 
-  // update lookup
-  for (let i = 0, len = beers.length; i < len; i++) {
-    beersLookup[beers[i].id] = beers[i];
-  }
-
-  console.log('Returning beers after sql');
-  console.log(beers);
-	res.send(beers);
+    console.log('Returning beers after sql');
+    console.log(beers);
+    res.send(response);
+  });
 });
 
 // create a beer
@@ -57,9 +63,11 @@ beersRouter.post('/', (req, res, next) => {
   var timeInSecs = new Date();
   req.query.id = Math.floor(timeInSecs.getTime() / 1000);
 
+  let overallScore = Number(req.query.look_score) + Number(req.query.taste_score);
+
   // push beer to database
   db.run(
-    'INSERT INTO beerTable (name, brewery, taste, taste_score, look, look_score, overall, id) VALUES ($name, $brewery, $taste, $taste_score, $look, $look_score, $overall, $id)',
+    'INSERT INTO beerTable (name, brewery, taste, taste_score, look, look_score, overall, overall_score, id) VALUES ($name, $brewery, $taste, $taste_score, $look, $look_score, $overall, $overall_score, $id)',
     {
       $name: req.query.name,
       $brewery: req.query.brewery,
@@ -68,6 +76,7 @@ beersRouter.post('/', (req, res, next) => {
       $look: req.query.look,
       $look_score: req.query.look_score,
       $overall: req.query.overall,
+      $overall_score: overallScore,
       $id: req.query.id
     },
     error => {
