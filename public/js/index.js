@@ -23,6 +23,9 @@ function getBeers(element) {
   }
 
   $.get('/beers/?order_by=' + sortType, function(response) {
+    console.log('Received beers');
+    console.log(response);
+
     let newTable = createTableBody();
     let oldTable = document.getElementById('beer-table-body');
 

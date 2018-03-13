@@ -18,7 +18,11 @@ const getBeersFromDB = orderBy => {
   db.all(
     sql,
     (err, rows) => {
+      console.log('inside before');
+      console.log(beers);
       beers = rows;
+      console.log('inside after');
+      console.log(beers);
     }
   );
 }
@@ -31,12 +35,17 @@ let beersRouter = express.Router();
 
 // Get all beers
 beersRouter.get('/', (req, res, next) => {
+  console.log('Returning beers before sql');
+  console.log(beers);
   getBeersFromDB(req.query.order_by);
 
   // update lookup
   for (let i = 0, len = beers.length; i < len; i++) {
     beersLookup[beers[i].id] = beers[i];
   }
+
+  console.log('Returning beers after sql');
+  console.log(beers);
 	res.send(beers);
 });
 
