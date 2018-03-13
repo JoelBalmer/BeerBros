@@ -1,7 +1,13 @@
+let sortDirection = "ASC";
+let sortType = "id";
+
 document.addEventListener("DOMContentLoaded", function(event) { 
   console.log('Doc ready!');
 
-  getBeers(null);
+  // sort table initially by id
+  let obj = {};
+  obj.id = "id";
+  getBeers(obj);
 
   document.addEventListener('click', event => {
     if (!$(event.target).closest('#beer-table').length) {
@@ -12,15 +18,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 // button handlers
 function getBeers(element) {
-  let orderBy = 'brewery';
   if (element) {
-    orderBy = element.id;
+    sortType = element.id;
   }
 
-  $.get('/beers/?order_by=' + orderBy, function(response) {
-
-    debugger;
-
+  $.get('/beers/?order_by=' + sortType, function(response) {
     let newTable = createTableBody();
     let oldTable = document.getElementById('beer-table-body');
 
@@ -29,15 +31,18 @@ function getBeers(element) {
     });
 
     oldTable.replaceWith(newTable);
+
     makeCellsClickable();
   });
 }
 
+/*
 function getBeer() {
   $.get('/beers/', function(response) {
     document.getElementById("get-beers").innerHTML = response;
   });
 }
+*/
 
 function createBeer(button) {
   document.getElementById('new-beer').hidden = false;

@@ -7,15 +7,20 @@ let beersLookup = {};
 // get database
 let db = new sqlite3.Database('./beers.sqlite');
 
-const getBeersFromDB = (orderBy) => {
+const getBeersFromDB = orderBy => {
+  let orderString = "";
+  if (orderBy) {
+    orderString = ' ORDER BY ' + orderBy + ' ' + 'ASC';
+  }
+
+  let sql = 'SELECT * FROM beerTable' + orderString;
+  
   db.all(
-    'SELECT * FROM beerTable ORDER BY $order ASC',
-    {
-      $order: orderBy
-    },
-    (error, rows) => {
+    sql,
+    (err, rows) => {
       beers = rows;
-    });
+    }
+  );
 }
 
 // initialise
