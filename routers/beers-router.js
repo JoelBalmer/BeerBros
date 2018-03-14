@@ -43,16 +43,12 @@ let beersRouter = express.Router();
 
 // Get all beers
 beersRouter.get('/', (req, res, next) => {
-  console.log('Returning beers before sql');
-  console.log(beers);
   getBeersFromDB(req.query.order_by, function(response){
     // update lookup
     for (let i = 0, len = response.length; i < len; i++) {
       beersLookup[response[i].id] = response[i];
     }
 
-    console.log('Returning beers after sql');
-    console.log(beers);
     res.send(response);
   });
 });
