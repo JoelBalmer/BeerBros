@@ -11,12 +11,13 @@ let db = new sqlite3.Database('./beers.sqlite');
 
 const getBeersFromDB = (orderBy, callback) => {
   let orderString = "";
+  let sql = 'SELECT * FROM beerTable';
+  
   if (orderBy) {
     sortType = orderBy;
     orderString = ' ORDER BY ' + sortType + ' ' + sortDirection;
+    sql += orderString;
   }
-
-  let sql = 'SELECT * FROM beerTable' + orderString;
   
   db.all(
     sql,
@@ -77,8 +78,10 @@ beersRouter.post('/', (req, res, next) => {
       }
       else {
         // return beer in request
-        beers.push(req.query); 
-        res.send(req.query);
+        beers.push(req.query);
+        getBeersFromDB(sortType, (response) => {
+          res.status(204).send(req.query);
+        });
       }
     }    
   );
@@ -114,11 +117,11 @@ beersRouter.delete('/:id', (req, res, next) => {
       if (error) {
         console.log(error);
         res.status(400).send('Could not delete beer from database');
-        return;
       }
       else {
-        getBeersFromDB();
-        res.status(204).send(beers);
+        getBeersFromDB(sortType, (response) => {
+          res.status(204).send(response);
+        });
       }
     }
   );
