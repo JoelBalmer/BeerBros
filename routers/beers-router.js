@@ -20,17 +20,11 @@ const getBeersFromDB = (orderBy, callback) => {
   
   db.all(
     sql,
-    (err, rows) => {
-      console.log('inside before');
-      console.log(beers);
-      
+    (err, rows) => {      
       beers = rows;
       if (callback) {
         callback(beers);
       }
-
-      console.log('inside after');
-      console.log(beers);
     }
   );
 }
