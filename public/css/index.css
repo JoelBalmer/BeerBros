@@ -1,10 +1,16 @@
 #root {
-	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	margin: 20px;
 }
 
-button, input, img   {
+button,
+input,
+img {
 	display: block;
+}
+
+h3 {
+	margin-bottom: 20px;
 }
 
 th {
@@ -14,6 +20,7 @@ th {
 table {
 	border: solid black 1px;
 	counter-reset: rowNumber;
+	width: 100%;
 }
 
 input {
@@ -33,15 +40,14 @@ tr:not(#beer-table-head-row):not(#new-beer):hover {
 	cursor: pointer;
 }
 
-th, td {
+th,
+td {
 	padding: 7px;
 }
-
 
 table tr > td:first-child {
 	counter-increment: rowNumber;
 }
-
 
 tbody tr td:first-child::before {
 	content: counter(rowNumber);
@@ -49,6 +55,10 @@ tbody tr td:first-child::before {
 
 #new-beer > td:first-child::before {
 	content: none;
+}
+
+#create-beer {
+	border: solid black 1px;
 }
 
 .selected > td:first-child::before {
@@ -60,15 +70,15 @@ tbody tr td:first-child::before {
 }
 
 .cancel-button {
-	background: #F08080;
-	width:20px;
-	height:20px;
+	background: #f08080;
+	width: 20px;
+	height: 20px;
 	padding: 0px;
 }
 
 .success-button {
 	background: lightgreen;
-	width:20px;
-	height:20px;
+	width: 20px;
+	height: 20px;
 	padding: 0px;
 }
