@@ -39,10 +39,6 @@ function getBeers(element) {
   });
 }
 
-function loginToFacebook() {
-  console.log("Logging into facebook");
-}
-
 function createBeer(button) {
   document.getElementById("new-beer").hidden = false;
   deselectRow();
@@ -109,6 +105,13 @@ const hideNewBeer = () => {
     list[i].value = "";
   }
 };
+
+function loginToFacebook() {
+  console.log("Logging into facebook");
+  $.get("/login/", function(response) {
+    console.log(response);
+  });
+}
 
 // private methods
 
