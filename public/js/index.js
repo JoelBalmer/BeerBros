@@ -108,7 +108,7 @@ const hideNewBeer = () => {
 
 function loginToFacebook() {
   console.log("Logging into facebook");
-  $.get("/login/", function(response) {
+  $.get("/auth/facebook", function(response) {
     console.log(response);
   });
 }
