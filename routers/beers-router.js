@@ -1,14 +1,13 @@
 const express = require("express");
 const sqlite3 = require("sqlite3");
 
-let user = "";
-let beers = [];
-let beersLookup = {};
-let sortDirection = "DESC";
-let sortType = "id";
+var beers = [];
+var beersLookup = {};
+var sortDirection = "DESC";
+var sortType = "id";
 
 // get database
-let db = new sqlite3.Database("./beers.sqlite");
+var db = new sqlite3.Database("./beers.sqlite");
 
 const getBeersFromDB = (orderBy, callback) => {
   let orderString = "";
@@ -32,7 +31,7 @@ const getBeersFromDB = (orderBy, callback) => {
 getBeersFromDB("id");
 
 // use separate beer rooter file
-let beersRouter = express.Router();
+var beersRouter = express.Router();
 
 // Get all beers
 beersRouter.get("/", (req, res, next) => {

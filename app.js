@@ -20,8 +20,15 @@ const requestLogging = (req, res, next) => {
 app.use(requestLogging);
 
 // handle the CRUD for beers
-const beersRouter = require("./routers/beers-router.js");
+var beersRouter = require("./routers/beers-router.js");
 app.use("/beers/", beersRouter);
+
+// user stuff
+var username = "";
+var userId = "";
+app.get("/user/name", (req, res, next) => {
+	res.send(username);
+});
 
 // facebook auth 2
 var FACEBOOK_APP_ID = "444071202692690";
@@ -35,7 +42,9 @@ passport.use(
 		},
 		function(accessToken, refreshToken, profile, done) {
 			console.log("Hello, facebook! Here's your profile...");
+			username = profile.displayName;
 			console.log(profile);
+
 			done(null);
 		}
 	)
