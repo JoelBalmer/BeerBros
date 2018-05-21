@@ -6,6 +6,8 @@ var passport = require("passport"),
 let express = require("express");
 let app = express();
 let server = app.listen(3000);
+let username = "";
+let userId = "";
 
 console.log("My server is running...");
 
@@ -23,9 +25,7 @@ app.use(requestLogging);
 var beersRouter = require("./routers/beers-router.js");
 app.use("/beers/", beersRouter);
 
-// user stuff
-var username = "";
-var userId = "";
+// get username
 app.get("/user/name", (req, res, next) => {
 	res.send(username);
 });
@@ -41,10 +41,8 @@ passport.use(
 			callbackURL: "http://localhost:3000/auth/facebook/callback"
 		},
 		function(accessToken, refreshToken, profile, done) {
-			console.log("Hello, facebook! Here's your profile...");
 			username = profile.displayName;
-			console.log(profile);
-
+			userId = profile.id;
 			done(null);
 		}
 	)
