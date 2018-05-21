@@ -1,44 +1,42 @@
-const express = require('express');
-const sqlite3 = require('sqlite3');
+const express = require("express");
+const sqlite3 = require("sqlite3");
 
+let user = "";
 let beers = [];
 let beersLookup = {};
 let sortDirection = "DESC";
 let sortType = "id";
 
 // get database
-let db = new sqlite3.Database('./beers.sqlite');
+let db = new sqlite3.Database("./beers.sqlite");
 
 const getBeersFromDB = (orderBy, callback) => {
   let orderString = "";
-  let sql = 'SELECT * FROM beerTable';
-  
+  let sql = "SELECT * FROM beerTable";
+
   if (orderBy) {
     sortType = orderBy;
-    orderString = ' ORDER BY ' + sortType + ' ' + sortDirection;
+    orderString = " ORDER BY " + sortType + " " + sortDirection;
     sql += orderString;
   }
-  
-  db.all(
-    sql,
-    (err, rows) => {      
-      beers = rows;
-      if (callback) {
-        callback(beers);
-      }
+
+  db.all(sql, (err, rows) => {
+    beers = rows;
+    if (callback) {
+      callback(beers);
     }
-  );
-}
+  });
+};
 
 // initialise
-getBeersFromDB('id');
+getBeersFromDB("id");
 
 // use separate beer rooter file
 let beersRouter = express.Router();
 
 // Get all beers
-beersRouter.get('/', (req, res, next) => {
-  getBeersFromDB(req.query.order_by, function(response){
+beersRouter.get("/", (req, res, next) => {
+  getBeersFromDB(req.query.order_by, function(response) {
     // update lookup
     for (let i = 0, len = response.length; i < len; i++) {
       beersLookup[response[i].id] = response[i];
@@ -49,16 +47,17 @@ beersRouter.get('/', (req, res, next) => {
 });
 
 // create a beer
-beersRouter.post('/', (req, res, next) => {
+beersRouter.post("/", (req, res, next) => {
   // should use middleware for this idea, ideally
   var timeInSecs = new Date();
   req.query.id = Math.floor(timeInSecs.getTime() / 1000);
 
-  let overallScore = Number(req.query.look_score) + Number(req.query.taste_score);
+  let overallScore =
+    Number(req.query.look_score) + Number(req.query.taste_score);
 
   // push beer to database
   db.run(
-    'INSERT INTO beerTable (name, brewery, taste, taste_score, look, look_score, overall, overall_score, id) VALUES ($name, $brewery, $taste, $taste_score, $look, $look_score, $overall, $overall_score, $id)',
+    "INSERT INTO beerTable (name, brewery, taste, taste_score, look, look_score, overall, overall_score, id) VALUES ($name, $brewery, $taste, $taste_score, $look, $look_score, $overall, $overall_score, $id)",
     {
       $name: req.query.name,
       $brewery: req.query.brewery,
@@ -73,17 +72,16 @@ beersRouter.post('/', (req, res, next) => {
     error => {
       if (error) {
         console.log(error);
-        res.status(400).send('Could not create');
+        res.status(400).send("Could not create");
         return;
-      }
-      else {
+      } else {
         // return beer in request
         beers.push(req.query);
-        getBeersFromDB(sortType, (response) => {
+        getBeersFromDB(sortType, response => {
           res.status(204).send(req.query);
         });
       }
-    }    
+    }
   );
 });
 
@@ -101,7 +99,7 @@ beersRouter.put('/:id', (req, res, next) => {
 */
 
 // Delete a beer
-beersRouter.delete('/:id', (req, res, next) => {
+beersRouter.delete("/:id", (req, res, next) => {
   let beer = beersLookup[req.params.id];
   if (!beer) {
     res.status(404).send("This beer isn't in your collection!");
@@ -109,17 +107,16 @@ beersRouter.delete('/:id', (req, res, next) => {
   }
 
   db.run(
-    'DELETE FROM beerTable WHERE id = $id',
+    "DELETE FROM beerTable WHERE id = $id",
     {
       $id: req.params.id
     },
     error => {
       if (error) {
         console.log(error);
-        res.status(400).send('Could not delete beer from database');
-      }
-      else {
-        getBeersFromDB(sortType, (response) => {
+        res.status(400).send("Could not delete beer from database");
+      } else {
+        getBeersFromDB(sortType, response => {
           res.status(204).send(response);
         });
       }

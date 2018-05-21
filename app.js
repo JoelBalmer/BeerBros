@@ -45,14 +45,14 @@ app.get(
 	"/auth/facebook/callback",
 	passport.authenticate("facebook", {
 		successRedirect: "/",
-		failureRedirect: "/"
+		failureRedirect: "/login"
 	})
 );
 
 // facbeook login error
 const loginError = (req, res, next) => {
 	console.log(`There was a facebook login error`);
-	next();
+	res.redirect("http://localhost:3000/");
 };
 app.use("/login", loginError);
 
