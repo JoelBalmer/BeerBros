@@ -11,6 +11,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("username").innerText = nameText;
   });
 
+  $.get("/user/id", function(response) {
+    console.log("Hiya!");
+    console.log(response);
+  });
+
   // sort table initially by id
   let obj = {};
   obj.id = "id";

@@ -25,9 +25,12 @@ app.use(requestLogging);
 var beersRouter = require("./routers/beers-router.js");
 app.use("/beers/", beersRouter);
 
-// get username
+// get user details
 app.get("/user/name", (req, res, next) => {
 	res.send(username);
+});
+app.get("/user/id", (req, res, next) => {
+	res.send(userId);
 });
 
 // facebook auth 2
