@@ -1,5 +1,6 @@
 let sortDirection = "DESC";
 let sortType = "id";
+let userId;
 
 document.addEventListener("DOMContentLoaded", function(event) {
   console.log("Doc ready!");
@@ -12,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   });
 
   $.get("/user/id", function(response) {
-    console.log("Hiya!");
-    console.log(response);
+    userId = response;
+    console.log(!userId);
   });
 
   // sort table initially by id
@@ -86,6 +87,10 @@ function deleteBeer(id) {
 }
 
 const inputSend = () => {
+  if (!userId) {
+    alert("You must login to facebook to post a beer");
+    return;
+  }
   let url = "/beers/";
   let name = document.getElementById("input-name").value;
   let brewery = document.getElementById("input-brewery").value;
