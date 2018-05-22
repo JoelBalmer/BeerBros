@@ -1,0 +1,21 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE "beerTable" (
+	`name`	text,
+	`brewery`	TEXT,
+	`taste`	text,
+	`taste_score`	INTEGER,
+	`look`	text,
+	`look_score`	INTEGER,
+	`overall`	TEXT,
+	`overall_score`	INTEGER,
+	`id`	INTEGER,
+	`uid`	INTEGER
+);
+INSERT INTO "beerTable" VALUES('Carling','Meantime','Bad',2,'Fine',4,'Poo',6,1520856080,10155988094031141);
+INSERT INTO "beerTable" VALUES('Beer','Brewdog','OK',5,'Brills',8,'Liked!',13,1520856317,10155988094031141);
+INSERT INTO "beerTable" VALUES('Doubloon','Laines','Smooth',8,'Golden',8,'Lovely!',16,1520982109,10155988094031141);
+INSERT INTO "beerTable" VALUES('Sussex Best','Harveys','Hoppy',7,'Cloudy',5,'Good',12,1521063428,10155988094031141);
+INSERT INTO "beerTable" VALUES('Shonger','B-eer','Bitter',7,'Brown',6,'',13,1524316370,10155988094031141);
+INSERT INTO "beerTable" VALUES('e','e','e',3,'e',3,'e',6,1527013693,10155988094031141);
+COMMIT;
