@@ -56,7 +56,7 @@ beersRouter.post("/", (req, res, next) => {
 
   // push beer to database
   db.run(
-    "INSERT INTO beerTable (name, brewery, taste, taste_score, look, look_score, overall, overall_score, id) VALUES ($name, $brewery, $taste, $taste_score, $look, $look_score, $overall, $overall_score, $id)",
+    "INSERT INTO beerTable (name, brewery, taste, taste_score, look, look_score, overall, overall_score, id, uid) VALUES ($name, $brewery, $taste, $taste_score, $look, $look_score, $overall, $overall_score, $id, $uid)",
     {
       $name: req.query.name,
       $brewery: req.query.brewery,
@@ -66,7 +66,8 @@ beersRouter.post("/", (req, res, next) => {
       $look_score: req.query.look_score,
       $overall: req.query.overall,
       $overall_score: overallScore,
-      $id: req.query.id
+      $id: req.query.id,
+      $uid: req.query.uid
     },
     error => {
       if (error) {

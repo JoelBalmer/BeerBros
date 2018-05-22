@@ -91,6 +91,7 @@ const inputSend = () => {
     alert("You must login to facebook to post a beer");
     return;
   }
+
   let url = "/beers/";
   let name = document.getElementById("input-name").value;
   let brewery = document.getElementById("input-brewery").value;
@@ -100,7 +101,9 @@ const inputSend = () => {
   let lookScore = document.getElementById("input-look-score").value;
   let overall = document.getElementById("input-overall").value;
   url +=
-    "?name=" +
+    "?uid=" +
+    userId +
+    "&name=" +
     name +
     "&brewery=" +
     brewery +
