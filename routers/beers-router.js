@@ -1,5 +1,6 @@
 const express = require("express");
 const sqlite3 = require("sqlite3");
+let app = require("../app.js");
 
 var beers = [];
 var beersLookup = {};
@@ -14,12 +15,17 @@ const getBeersFromDB = (orderBy, callback) => {
   let sql = "SELECT * FROM beerTable";
 
   if (orderBy) {
+    // filter for users beers if logged in
+    if (app.userId) {
+      sql += " WHERE uid = $uid";
+    }
+
     sortType = orderBy;
     orderString = " ORDER BY " + sortType + " " + sortDirection;
     sql += orderString;
   }
 
-  db.all(sql, (err, rows) => {
+  db.all(sql, { $uid: app.userId }, (err, rows) => {
     beers = rows;
     if (callback) {
       callback(beers);

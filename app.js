@@ -46,6 +46,9 @@ passport.use(
 		function(accessToken, refreshToken, profile, done) {
 			username = profile.displayName;
 			userId = profile.id;
+
+			// for user details to be public
+			module.exports.userId = userId;
 			done(null);
 		}
 	)

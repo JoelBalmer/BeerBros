@@ -3,18 +3,14 @@ let sortType = "id";
 let userId;
 
 document.addEventListener("DOMContentLoaded", function(event) {
-  console.log("Doc ready!");
-
   $.get("/user/name", function(response) {
-    let nameText = response
+    document.getElementById("username").innerText = response
       ? "Welcome, " + response + "!"
       : "Login to facebook";
-    document.getElementById("username").innerText = nameText;
   });
 
   $.get("/user/id", function(response) {
     userId = response;
-    console.log(!userId);
   });
 
   // sort table initially by id
@@ -61,6 +57,11 @@ function getBeer() {
 */
 
 function createBeer(button) {
+  if (!userId) {
+    alert("You must login to facebook to post a beer");
+    return;
+  }
+
   document.getElementById("new-beer").hidden = false;
   deselectRow();
   button.disabled = true;
@@ -87,11 +88,6 @@ function deleteBeer(id) {
 }
 
 const inputSend = () => {
-  if (!userId) {
-    alert("You must login to facebook to post a beer");
-    return;
-  }
-
   let url = "/beers/";
   let name = document.getElementById("input-name").value;
   let brewery = document.getElementById("input-brewery").value;
