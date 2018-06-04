@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("username").innerText = response
       ? "Welcome, " + response + "!"
       : "Login to facebook";
+    document.getElementById("logout").hidden = !response;
   });
 
   $.get("/user/id", function(response) {
@@ -32,9 +33,6 @@ function getBeers(element) {
   }
 
   $.get("/beers/?order_by=" + sortType, function(response) {
-    console.log("Received beers");
-    console.log(response);
-
     let newTable = createTableBody();
     let oldTable = document.getElementById("beer-table-body");
 
@@ -47,14 +45,6 @@ function getBeers(element) {
     makeCellsClickable();
   });
 }
-
-/*
-function getBeer() {
-  $.get('/beers/', function(response) {
-    document.getElementById("get-beers").innerHTML = response;
-  });
-}
-*/
 
 function createBeer(button) {
   if (!userId) {

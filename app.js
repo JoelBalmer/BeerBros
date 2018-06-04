@@ -1,6 +1,7 @@
 // facebook auth 1
 var passport = require("passport"),
-	FacebookStrategy = require("passport-facebook").Strategy;
+	FacebookStrategy = require("passport-facebook").Strategy,
+	session = require("client-sessions");
 
 // setup expres server
 let express = require("express");
@@ -8,11 +9,21 @@ let app = express();
 let server = app.listen(3000);
 let username = "";
 let userId = "";
+let token = "";
 
 console.log("My server is running...");
 
 // show public site
 app.use(express.static("public"));
+
+app.use(
+	session({
+		cookieName: "session",
+		secret: "thereisabsolutelynothingthatidontlikeaboutnode",
+		duration: 30 * 60 * 1000,
+		activeDuration: 5 * 60 * 1000
+	})
+);
 
 // request logging
 const requestLogging = (req, res, next) => {
@@ -46,6 +57,7 @@ passport.use(
 		function(accessToken, refreshToken, profile, done) {
 			username = profile.displayName;
 			userId = profile.id;
+			accessToken = token;
 
 			// for user details to be public
 			module.exports.userId = userId;
@@ -61,6 +73,35 @@ app.get(
 		failureRedirect: "/login"
 	})
 );
+
+// logout of facebook
+app.get("/logout", function(req, res) {
+	debugger;
+	/*
+	req.logout();
+	res.redirect("https://www.facebook.com/logout.php?access_token=" + token + "&confirm=1&next=http://localhost:3000/");
+	console.log(req);
+	res.redirect(
+		"http://localhost:3000/"
+	);
+	*/
+
+	req.logout();
+	res.redirect(
+		"https://www.facebook.com/logout.php?next=" +
+			"http://localhost:3000/" +
+			"/logout&access_token=" +
+			token
+	);
+
+	/*
+	req.session.destroy(err => {
+		if (err) return next(err);
+		req.logout();
+		res.sendStatus(200);
+	});
+	*/
+});
 
 // facbeook login error
 const loginError = (req, res, next) => {
