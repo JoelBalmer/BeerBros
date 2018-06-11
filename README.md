@@ -1,13 +1,4 @@
 # BeerBros
-Log in to Facebook to rate and order your favourite beers!
+Inspired by my brother's notebook of beers he's tried, this app let's you order all beers (by taste score, brewery, etc.), or login to facebook to add new beers!
 
 ![Screen shot](res/screen_shot.png?raw=true "Screen shot")
-
-# Installation
-* Clone this repo
-* If new libraries installed after a contribution, run `npm update` just to make sure
-
-# Usage
-Reorder the current beers, or login to facebook to add new beers
-
-Enjoy!
