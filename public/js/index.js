@@ -32,9 +32,6 @@ function getBeers(element) {
   }
 
   $.get("/beers/?order_by=" + sortType, function(response) {
-    console.log("Received beers");
-    console.log(response);
-
     let newTable = createTableBody();
     let oldTable = document.getElementById("beer-table-body");
 
@@ -47,14 +44,6 @@ function getBeers(element) {
     makeCellsClickable();
   });
 }
-
-/*
-function getBeer() {
-  $.get('/beers/', function(response) {
-    document.getElementById("get-beers").innerHTML = response;
-  });
-}
-*/
 
 function createBeer(button) {
   if (!userId) {
@@ -80,8 +69,6 @@ function deleteBeer(id) {
     url: url,
     type: "DELETE",
     success: function(response) {
-      console.log("Receiving delete response");
-      console.log(response);
       getBeers(null);
     }
   });
@@ -129,8 +116,6 @@ const hideNewBeer = () => {
     list[i].value = "";
   }
 };
-
-// private methods
 
 const rowFromBeer = beer => {
   let row = document.createElement("tr");
@@ -212,9 +197,6 @@ const deselectRow = () => {
   if (selected.length !== 0) {
     let cancel = selected.find(".cancel-button")[0];
     cancel.hidden = true;
-    //let success = selected.find('.success-button')[0];
-    //success.hidden = true;
-    //selected[0].lastElementChild.firstElementChild.hidden = false;
   }
 
   $(".selected").removeClass("selected");
@@ -230,8 +212,6 @@ const makeCellsClickable = () => {
     deselectRow();
 
     this.parentNode.firstElementChild.lastElementChild.hidden = false;
-    //this.parentNode.lastElementChild.lastElementChild.hidden = false;
-    //this.parentNode.lastElementChild.firstElementChild.hidden = true;
     this.parentNode.classList.add("selected");
   });
 };
