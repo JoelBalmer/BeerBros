@@ -5,7 +5,7 @@ var passport = require("passport"),
 // setup expres server
 let express = require("express");
 let app = express();
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 5000;
 let server = app.listen(port);
 let username = "";
 let userId = "";
@@ -42,7 +42,7 @@ passport.use(
 		{
 			clientID: FACEBOOK_APP_ID,
 			clientSecret: FACEBOOK_APP_SECRET,
-			callbackURL: "http://localhost:3000/auth/facebook/callback"
+			callbackURL: "http://localhost:5000/auth/facebook/callback"
 		},
 		function(accessToken, refreshToken, profile, done) {
 			username = profile.displayName;
@@ -66,7 +66,7 @@ app.get(
 // facbeook login error
 const loginError = (req, res, next) => {
 	console.log(`There was a facebook login error`);
-	res.redirect("http://localhost:3000/");
+	res.redirect("http://localhost:5000/");
 };
 app.use("/login", loginError);
 
