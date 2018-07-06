@@ -5,7 +5,8 @@ var passport = require("passport"),
 // setup expres server
 let express = require("express");
 let app = express();
-let server = app.listen(3000);
+let port = process.env.PORT || 3000;
+let server = app.listen(port);
 let username = "";
 let userId = "";
 
